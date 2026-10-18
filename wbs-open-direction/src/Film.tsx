@@ -4,7 +4,7 @@ import {C, FONT} from './theme';
 import {FPS, HALF, T} from './timing';
 import {clamp01, eIn, eInOut, eOut, eSoft, lerp, mix, prog, springAt} from './motion';
 import {BlockView, LANE_W, makeLane} from './Blocks';
-import {CAM_CLOSE, Figure} from './Figure';
+import {CAM_FAR, closeUp, Figure, STOOL} from './Figure';
 import {Ribbon, Tray} from './Props';
 
 // ---------------------------------------------------------------- type helpers
@@ -189,13 +189,22 @@ export const Film: React.FC = () => {
   // --- date
   const tileIn = (i: number) => springAt(t, T.etnein + 0.08 + i * 0.06, 15, 160);
   const hero19 = prog(t, T.t19 - 0.05, T.t19 + 0.4, eOut);
-  const dateOut = prog(t, T.october + 0.62, T.october + 0.9, eIn);
-  const morph = prog(t, T.october + 0.68, T.nefham + 0.42, eInOut);
-  const tileW = lerp(lerp(150, 300, hero19), 230, morph);
-  const tileH = lerp(lerp(190, 380, hero19), 1180, morph);
-  const tileCy = lerp(960, CAM_CLOSE.sy, morph);
-  const tileFill = morph > 0 ? (morph < 0.5 ? mix(C.navy, C.sky, morph * 2) : mix(C.sky, '#FFFFFF', morph * 2 - 1)) : mix('#FFFFFF', C.navy, hero19);
-  const figureOn = prog(t, T.nefham + 0.38, T.nefham + 0.46, (x) => x);
+  // the 19 tile becomes the worker's stool
+  const dateOut = prog(t, T.october + 0.42, T.october + 0.7, eIn);
+  const morph = prog(t, T.october + 0.5, T.october + 1.02, eInOut);
+  const stool = {
+    w: STOOL.w * CAM_FAR.zoom,
+    h: STOOL.h * CAM_FAR.zoom,
+    cx: CAM_FAR.sx + (STOOL.x + STOOL.w / 2 - CAM_FAR.wx) * CAM_FAR.zoom,
+    cy: CAM_FAR.sy + (STOOL.y + STOOL.h / 2 - CAM_FAR.wy) * CAM_FAR.zoom,
+  };
+  const tileW = lerp(lerp(150, 300, hero19), stool.w, morph);
+  const tileH = lerp(lerp(190, 380, hero19), stool.h, morph);
+  const tileCx = lerp(540, stool.cx, morph);
+  const tileCy = lerp(960, stool.cy, morph);
+  const tileFill = morph > 0 ? mix(C.navy, C.sky, morph) : mix('#FFFFFF', C.navy, hero19);
+  const tileGone = t >= T.october + 1.02;
+  const bodyOp = prog(t, T.october + 0.75, T.october + 1.2, eSoft);
 
   // --- topic titles (one anchor line that changes its words)
   const titleA = {reveal: prog(t, T.nefham + 0.0, T.nefham + 0.45, eOut), hide: prog(t, T.nraja3 + 0.35, T.nraja3 + 0.65, eIn)};
@@ -256,7 +265,7 @@ export const Film: React.FC = () => {
       )}
 
       {/* ============ date: one tile in the week */}
-      {t >= T.etnein - 0.1 && t < T.nefham + 0.6 && (
+      {t >= T.etnein - 0.1 && t < T.nefham + 0.2 && (
         <AbsoluteFill>
           {[17, 18, 20, 21].map((n) => {
             const k = n - 19;
@@ -272,14 +281,14 @@ export const Film: React.FC = () => {
               </div>
             );
           })}
-          {t < T.nefham + 0.5 && (
-            <div style={{position: 'absolute', left: 540 - tileW / 2, top: tileCy - tileH / 2 + (1 - tileIn(2)) * 80, width: tileW, height: tileH,
-              borderRadius: lerp(26, 115, morph), background: tileFill, opacity: tileIn(2) * (1 - prog(t, T.nefham + 0.42, T.nefham + 0.5, (x) => x)),
+          {!tileGone && (
+            <div style={{position: 'absolute', left: tileCx - tileW / 2, top: tileCy - tileH / 2 + (1 - tileIn(2)) * 80, width: tileW, height: tileH,
+              borderRadius: lerp(26, 24, morph), background: tileFill, opacity: tileIn(2),
               border: `2px solid rgba(16,47,104,${0.08 * (1 - hero19)})`,
               boxShadow: `0 ${24 * hero19}px ${60 * hero19}px rgba(16,47,104,${0.22 * hero19 * (1 - morph)})`,
               display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
               <span style={{fontSize: lerp(64, 196, hero19), fontWeight: lerp(500, 700, hero19), color: mix(C.navy, C.offWhite, hero19),
-                opacity: 1 - prog(t, T.october + 0.62, T.october + 0.8), letterSpacing: 0}}>19</span>
+                opacity: 1 - prog(t, T.october + 0.4, T.october + 0.58), letterSpacing: 0}}>19</span>
             </div>
           )}
           <Txt y={680} size={66} reveal={prog(t, T.etnein - 0.05, T.etnein + 0.35, eOut)} op={1 - dateOut} dy={-30 * dateOut}>الاثنين</Txt>
@@ -288,10 +297,11 @@ export const Film: React.FC = () => {
       )}
 
       {/* ============ vascular health → habits (one camera) */}
-      {t >= T.nefham + 0.38 && t < T.nekhtar + 1.0 && (
-        <AbsoluteFill style={{opacity: figureOn}}>
-          <Figure t={t} />
-        </AbsoluteFill>
+      {t >= T.october + 0.7 && t < T.nekhtar + 1.0 && <Figure t={t} bodyOp={bodyOp} stoolOp={tileGone ? 1 : 0} />}
+
+      {/* calm reading area for the topic line while the camera is close to the leg */}
+      {closeUp(t) > 0 && (
+        <AbsoluteFill style={{background: `linear-gradient(180deg, ${C.pale} 0%, ${C.pale} 31%, rgba(236,247,253,0) 38%)`, opacity: closeUp(t)}} />
       )}
 
       {/* ============ nutrition tray tracks in */}
@@ -381,11 +391,16 @@ export const Film: React.FC = () => {
             وسط كل اللي مطلوب منك…
           </Txt>
           {/* lockup */}
+          {/* co-brand row: the initiative | its host */}
           {lockWbs > 0 && (
-            <Logo src="wbs-logo.png" w={320} cx={540} cy={392 + (1 - lockWbs) * 50} ratio={R.wbs} clip={`inset(${(1 - lockWbs) * 100}% -5% -5% -5%)`} />
+            <Logo src="wbs-logo.png" w={290} cx={732} cy={470 + (1 - lockWbs) * 50} ratio={R.wbs} clip={`inset(${(1 - lockWbs) * 100}% -5% -5% -5%)`} />
           )}
           {lockBf > 0 && (
-            <Logo src="breadfast-logo.png" w={260} cx={540} cy={596} ratio={R.breadfast} clip={`inset(-5% ${(1 - lockBf) * 100}% -5% -5%)`} />
+            <div style={{position: 'absolute', left: 539, top: 470 - 85, width: 2, height: 170, borderRadius: 1, background: 'rgba(16,47,104,0.16)',
+              transform: `scaleY(${lockBf})`}} />
+          )}
+          {lockBf > 0 && (
+            <Logo src="breadfast-logo.png" w={290} cx={342} cy={470 + (1 - lockBf) * 20} ratio={R.breadfast} clip={`inset(-5% -5% -5% ${(1 - lockBf) * 100}%)`} />
           )}
           {pill > 0 && (
             <div style={{position: 'absolute', left: 540 - 270, width: 540, top: 985 - 48, height: 96, borderRadius: 48, background: C.navy,

@@ -73,14 +73,17 @@ def main(vo_path, src, out):
     carve_db = -4.0 * env
     band = sosfilt(butter(2, [1000, 4000], 'band', fs=SR, output='sos'), music, axis=0)
     music_c = music + band * (10 ** (carve_db / 20) - 1)[:, None]
-    music_d = music_c * (10 ** (duck_db / 20))[:, None]
+    # after the last word the bed comes up only a little, so the ending stays calm
+    tt = np.arange(N) / SR
+    post_db = -4.0 * np.clip((tt - 25.1) / 0.8, 0, 1)
+    music_d = music_c * (10 ** ((duck_db + post_db) / 20))[:, None]
 
     v2 = np.stack([voice, voice], 1)
     # set relative levels: voice ~ -16 LUFS short-term, music bed sits ~13 LU under it under speech
     vi, _ = lufs(v2)
     v2 *= 10 ** ((-16 - vi) / 20)
     mi, _ = lufs(music)
-    music_d *= 10 ** ((-17.0 - mi) / 20)  # undocked level; ducking brings it to ~-26 under words
+    music_d *= 10 ** ((-19.5 - mi) / 20)  # undocked level; ducking brings it to ~-26 under words
     si, _ = lufs(sfx)
     sfx *= 10 ** ((-26 - si) / 20)
     mix = v2 + music_d + sfx

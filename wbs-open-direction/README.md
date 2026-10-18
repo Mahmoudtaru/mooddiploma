@@ -6,7 +6,7 @@ open-direction brief, the four official logos and the supplied voice-over record
 ## Deliverables
 | File | What |
 |---|---|
-| `out/WbS-Event-Film_9x16.mp4` | Final film: 1080×1920, 30 fps, 33.0 s (990 frames), H.264 High yuv420p + AAC-LC 48 kHz stereo 320 kb/s, −14.1 LUFS integrated, −1.1 dBFS peak |
+| `out/WbS-Event-Film_9x16.mp4` | Final film: 1080×1920, 30 fps, 33.0 s (990 frames), H.264 High yuv420p + AAC-LC 48 kHz stereo 320 kb/s, −14.2 LUFS integrated, −1.1 dBFS peak |
 | `out/WbS-Event-Film_closing.png` | Clean still of the finished closing composition (frame 960, 32.0 s) |
 | this folder | Editable Remotion project with assets, fonts, timing, score and mix scripts |
 
@@ -18,15 +18,16 @@ That lit slot carries the whole film:
 1. It opens into the frame and becomes the initiative's world: the WbS mark rises, Breadfast arrives on a magenta
    hairline, and the **Powered by iVein** chip lands with «بدعم من آيفين».
 2. The iVein chip stays on as the header while the slot turns into the **19** tile of a week strip (الاثنين / 19 / أكتوبر).
-3. The tile stretches into a shin. Inside it a vein draws and flows (iVein blue world). On «الدوالي» a segment twists
-   and the flow pools; on «الوقاية» it straightens, the valves flash and the flow speeds up.
-4. The camera pulls back: the shin belongs to a seated worker who stands and stretches (habits: sitting, standing, movement).
+3. The tile becomes the stool of a worker seated at a desk (iVein blue world). The camera pushes in to the worker's shin,
+   where a vein draws and flows. On «الدوالي» a segment twists and the flow pools; on «الوقاية» it straightens, the valves
+   flash and the flow speeds up.
+4. The camera pulls back to the worker, still seated, who then stands and stretches (habits: sitting, standing, movement).
 5. A tracking pan lands on a lunch tray whose compartments, the day's "slots" again, fill on the half-beats (nutrition).
 6. A pink band wipes in Baheya's world and draws the awareness ribbon. «التوعية بسرطان الثدي» and «أهمية الكشف المبكر»
    follow, with an attention pulse on «الكشف».
 7. The blocks close back in under «وسط كل اللي مطلوب منك…», then part on the downbeat to make room for
-   «صحتك ليها مكان.». The lockup assembles (WbS + Breadfast, message, date, مستنيينكم, Powered by iVein | بالتعاون مع Baheya)
-   and holds about 7.4 s (25.6 → 33.0 s) over a quietly drifting ghost-slot background.
+   «صحتك ليها مكان.». The lockup assembles: a WbS | Breadfast co-brand row, the message, the date, مستنيينكم, and Powered by iVein | بالتعاون مع Baheya. It
+   holds about 7.4 s (25.6 → 33.0 s) over a quietly drifting ghost-slot background.
 
 ## Voice-over
 `audio-src/vo.wav` is the supplied recording (25.00 s, 24 kHz mono), used as delivered with the same words, order, pitch
@@ -46,8 +47,9 @@ on «لصحتك» (2.70 s) and «صحتك ليها مكان» (23.10 s). Structu
 
 There are about ten designed effects, all at turning points: the slot lighting, the slot opening, the 19 lock, the pull-back,
 the food landing, the pink wipe, the parting with a sub boom, and the invitation. `audio-tools/mix.py` ducks the music about 9.5 dB
-under speech with an extra 4 dB carve at 1–4 kHz, dips a further 2.5 dB on the partner names and the date, then normalises
-to −14 LUFS with a peak ceiling.
+under speech with an extra 4 dB carve at 1–4 kHz, dips a further 2.5 dB on the partner names and the date, and drops 4 dB more
+after the last word so the ending stays calm. It then normalises to −14 LUFS with a peak ceiling. Under speech the voice sits a
+median 10 dB above the bed; after the VO the bed sits about 4 dB below the voice's level.
 
 ## Rebuild
 ```bash

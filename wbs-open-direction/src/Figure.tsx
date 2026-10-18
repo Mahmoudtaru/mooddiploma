@@ -3,8 +3,8 @@ import {C} from './theme';
 import {T} from './timing';
 import {clamp01, eInOut, eOut, lerp, mix, prog} from './motion';
 
-// The worker at a desk, drawn in world units. The close-up of the shin (zoom 5)
-// is the vein passage; pulling back reveals the person (habits passage).
+// The worker at a desk, drawn in world units. We meet them seated, the camera pushes in
+// to the shin for the vein passage, pulls back to them still seated, then they stand (habits).
 const RAD = Math.PI / 180;
 const K = {x: -200, y: 0}; // knee (fixed)
 const A = {x: -200, y: 190}; // ankle (fixed)
@@ -19,8 +19,9 @@ const pt = (o: {x: number; y: number}, len: number, deg: number) => ({
   y: o.y + len * Math.sin(deg * RAD),
 });
 
-export const CAM_CLOSE = {zoom: 5, wx: -200, wy: 95, sx: 540, sy: 1330};
-const CAM_FAR = {zoom: 1.02, wx: -200, wy: -190, sx: 540, sy: 1115};
+const CAM_CLOSE = {zoom: 2.9, wx: -200, wy: 95, sx: 540, sy: 1330};
+export const CAM_FAR = {zoom: 1.02, wx: -200, wy: -190, sx: 540, sy: 1115};
+export const STOOL = {x: -22, y: 26, w: 150, h: 186};
 
 // vein centre-line in world units, from ankle (s=0) to knee (s=1)
 const veinX = (y: number, v: number) => {
@@ -42,28 +43,31 @@ const flowSpeed = (t: number, v: number) => {
 export const varicose = (t: number) =>
   prog(t, T.dawaly, T.dawaly + 0.6, eInOut) * (1 - prog(t, T.wiqaya, T.wiqaya + 0.55, eOut));
 
-export const Figure: React.FC<{t: number}> = ({t}) => {
+export const closeUp = (t: number) =>
+  prog(t, T.nefham + 0.4, T.nefham + 1.0, eInOut) * (1 - prog(t, T.wiqaya + 0.5, T.wiqaya + 1.1, eInOut));
+
+export const Figure: React.FC<{t: number; bodyOp?: number; stoolOp?: number}> = ({t, bodyOp = 1, stoolOp = 1}) => {
   const v = varicose(t);
   // ---- camera
-  const pull = prog(t, T.nraja3 + 0.25, T.nraja3 + 1.05, eInOut);
-  const zoom = Math.exp(lerp(Math.log(CAM_CLOSE.zoom), Math.log(CAM_FAR.zoom), pull));
+  const c = closeUp(t); // 0 = whole person, 1 = shin close-up
+  const zoom = Math.exp(lerp(Math.log(CAM_FAR.zoom), Math.log(CAM_CLOSE.zoom), c));
   const pan = prog(t, T.nekhtar + 0.2, T.nekhtar + 0.85, eInOut);
-  const wx = lerp(CAM_CLOSE.wx, CAM_FAR.wx, pull);
-  const wy = lerp(CAM_CLOSE.wy, CAM_FAR.wy, pull);
-  const sx = lerp(CAM_CLOSE.sx, CAM_FAR.sx, pull) + 1150 * pan;
-  const sy = lerp(CAM_CLOSE.sy, CAM_FAR.sy, pull);
+  const wx = lerp(CAM_FAR.wx, CAM_CLOSE.wx, c);
+  const wy = lerp(CAM_FAR.wy, CAM_CLOSE.wy, c);
+  const sx = lerp(CAM_FAR.sx, CAM_CLOSE.sx, c) + 1150 * pan;
+  const sy = lerp(CAM_FAR.sy, CAM_CLOSE.sy, c);
 
   // ---- pose
-  const grow = prog(t, T.nefham + 0.4, T.nefham + 0.85, eOut);
-  const stand = prog(t, T.adatna - 0.1, T.adatna + 0.55, eInOut);
-  const stretch = prog(t, T.adatna + 0.5, T.adatna + 0.95, eOut) * (1 - prog(t, T.nekhtar + 0.3, T.nekhtar + 0.8));
+  const stand = prog(t, T.adatna + 0.1, T.adatna + 0.7, eInOut);
+  const stretch = prog(t, T.adatna + 0.65, T.adatna + 1.05, eOut) * (1 - prog(t, T.nekhtar + 0.3, T.nekhtar + 0.8));
   const thighA = lerp(0, -90, stand);
   const hip = pt(K, THIGH, thighA);
   const torsoA = lerp(-95, -90, stand) - 26 * Math.sin(Math.PI * stand);
   const sh = pt(hip, TORSO, torsoA);
   const head = pt(sh, 84, torsoA);
   const upA = lerp(lerp(112, 96, stand), -118, stretch);
-  const foA = lerp(lerp(186, 101, stand), -100, stretch);
+  const typing = 3.5 * Math.sin(t * 15) * (1 - stand);
+  const foA = lerp(lerp(186 + typing, 101, stand), -100, stretch);
   const el = pt(sh, UPPER, upA);
   const hand = pt(el, FORE, foA);
   const elF = pt({x: sh.x + 12, y: sh.y - 4}, UPPER, upA + 9);
@@ -72,9 +76,7 @@ export const Figure: React.FC<{t: number}> = ({t}) => {
   const kneeF = {x: K.x + lerp(10, 22, stand), y: K.y - lerp(6, 0, stand)};
   const ankF = {x: A.x + 22 * stand + 10 * (1 - stand), y: A.y};
 
-  const thighEnd = {x: lerp(K.x, hip.x, grow), y: lerp(K.y, hip.y, grow)};
-  const toe = {x: A.x - 64 * grow, y: A.y};
-  const world = prog(t, T.nraja3 + 0.55, T.nraja3 + 1.0); // desk, stool, rest of body
+  const toe = {x: A.x - 64, y: A.y};
   const pz = 1 + (CAM_CLOSE.zoom / zoom - 1) * 0.45; // particles stay legible when pulled back
 
   // ---- flow particles
@@ -95,7 +97,7 @@ export const Figure: React.FC<{t: number}> = ({t}) => {
     const y = 186 - i * 4;
     return `${i ? 'L' : 'M'}${veinX(y, v).toFixed(2)} ${y}`;
   }).join(' ');
-  const veinDraw = prog(t, T.nefham + 0.45, T.nefham + 1.0, eOut);
+  const veinDraw = prog(t, T.nefham + 0.5, T.nefham + 1.0, eOut);
   const veinCol = mix(C.iveinCyan, '#5A3E9E', v);
   const flash = (s0: number) => Math.max(0, 1 - Math.abs(t - (T.wiqaya + 0.25 + s0 * 0.5)) / 0.18);
 
@@ -120,7 +122,7 @@ export const Figure: React.FC<{t: number}> = ({t}) => {
       </defs>
       <g transform={`translate(${sx} ${sy}) scale(${zoom}) translate(${-wx} ${-wy})`}>
         {/* floor + desk + stool */}
-        <g opacity={world}>
+        <g opacity={bodyOp}>
           <line x1={-700} y1={214} x2={420} y2={214} stroke={C.navy} strokeOpacity={0.12} strokeWidth={4} />
           <line x1={-470} y1={-80} x2={-470} y2={212} stroke="#2A4F8F" strokeWidth={12} strokeLinecap="round" />
           <line x1={-160} y1={-80} x2={-160} y2={212} stroke="#2A4F8F" strokeWidth={12} strokeLinecap="round" />
@@ -128,23 +130,22 @@ export const Figure: React.FC<{t: number}> = ({t}) => {
           <line x1={-345} y1={-96} x2={-185} y2={-96} stroke={C.navy} strokeWidth={9} strokeLinecap="round" />
           <line x1={-345} y1={-96} x2={-372} y2={-214} stroke={C.navy} strokeWidth={11} strokeLinecap="round" />
           <line x1={-352} y1={-118} x2={-370} y2={-196} stroke={C.sky} strokeWidth={4} strokeLinecap="round" />
-          <rect x={-22} y={26} width={150} height={186} rx={24} fill={C.sky} />
-          <rect x={-22} y={26} width={150} height={20} rx={10} fill="#FFFFFF" opacity={0.35} />
         </g>
-        <g filter="url(#soft)">
+        <rect x={STOOL.x} y={STOOL.y} width={STOOL.w} height={STOOL.h} rx={24} fill={C.sky} opacity={stoolOp} />
+        <g filter="url(#soft)" opacity={bodyOp}>
           {/* far side limbs */}
-          <g opacity={world}>
+          <g>
             {limb(sh, elF, far)}
             {limb(elF, handF, far)}
             {limb(hipF, kneeF, far)}
             {limb(kneeF, ankF, far)}
             {limb(ankF, {x: ankF.x - 64, y: ankF.y}, far)}
           </g>
-          {/* near leg: always present (it is the close-up) */}
-          {grow > 0 && limb(K, thighEnd)}
+          {/* near leg: the one the camera visits */}
+          {limb(K, hip)}
           {limb(K, A)}
-          {grow > 0 && limb(A, toe)}
-          <g opacity={world}>
+          {limb(A, toe)}
+          <g>
             {limb(hip, sh, '#FFFFFF', 66)}
             <circle cx={head.x} cy={head.y} r={57.5} fill="rgba(16,47,104,0.30)" />
             <circle cx={head.x} cy={head.y} r={54} fill="#FFFFFF" />
