@@ -13,7 +13,7 @@ from scipy.signal import butter, fftconvolve, sosfilt
 import soundfile as sf
 
 SR = 48000
-DUR = 30.0
+DUR = 28.0
 N = int(SR * DUR)
 BEAT = 0.51
 BAR = BEAT * 4
@@ -238,7 +238,7 @@ def build():
     bars = []
     t = D0
     i = 0
-    while t < 27.3:
+    while t < 25.3:
         bars.append((i, t))
         t += BAR
         i += 1
@@ -248,7 +248,7 @@ def build():
             sec = 'soft'
         if 21.0 < t0 < 23.0:
             sec = 'build'
-        half_bar = t0 > 27.1  # last bar: two beats, then the final hit on beat 3
+        half_bar = t0 > 25.1  # last bar: two beats, then the final hit on beat 3
         chord = PROG[i % 4]
         if sec == 'soft':
             chord = ['G', 'D', 'A', 'Bm'][(i - 7) % 4]
@@ -303,7 +303,7 @@ def build():
         # lead hook: only where the voice leaves room (between phrases and after the VO)
         if t0 >= 23.0:
             motif = [(0, 78), (1.5, 81), (2.5, 83), (3.0, 81), (6, 78), (7, 76), (8, 78), (11, 74), (12, 76), (14, 78)]
-            if t0 > 27:
+            if t0 > 25:
                 motif = [(0, 81), (1.5, 83), (2.5, 85), (3.0, 83), (6, 81), (8, 78), (11, 78), (12, 81)]
             for st, m in motif:
                 if half_bar and st >= 8:

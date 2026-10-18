@@ -6,7 +6,7 @@
   "scripts": {
     "studio": "remotion studio",
     "render": "remotion render WbSFilm out/WbS-Event-Film_9x16.mp4",
-    "still": "remotion still WbSFilm out/closing.png --frame=870"
+    "still": "remotion still WbSFilm out/closing.png --frame=810"
   },
   "dependencies": {
     "@remotion/cli": "4.0.536",
