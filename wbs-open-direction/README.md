@@ -6,8 +6,8 @@ open-direction brief, the four official logos and the supplied voice-over record
 ## Deliverables
 | File | What |
 |---|---|
-| `out/WbS-Event-Film_9x16.mp4` | Final film: 1080×1920, 30 fps, 33.0 s (990 frames), H.264 High yuv420p + AAC-LC 48 kHz stereo 320 kb/s, −14.2 LUFS integrated, −1.1 dBFS peak |
-| `out/WbS-Event-Film_closing.png` | Clean still of the finished closing composition (frame 960, 32.0 s) |
+| `out/WbS-Event-Film_9x16.mp4` | Final film: 1080×1920, 30 fps, 30.0 s (900 frames), H.264 High yuv420p + AAC-LC 48 kHz stereo 320 kb/s, −14.2 LUFS integrated, −1.1 dBFS peak |
+| `out/WbS-Event-Film_closing.png` | Clean still of the finished closing composition (frame 870, 29.0 s) |
 | this folder | Editable Remotion project with assets, fonts, timing, score and mix scripts |
 
 ## Concept: "the slot" (مكان في يومك)
@@ -21,13 +21,17 @@ That lit slot carries the whole film:
 3. The tile becomes the stool of a worker seated at a desk (iVein blue world). The camera pushes in to the worker's shin,
    where a vein draws and flows. On «الدوالي» a segment twists and the flow pools; on «الوقاية» it straightens, the valves
    flash and the flow speeds up.
-4. The camera pulls back to the worker, still seated, who then stands and stretches (habits: sitting, standing, movement).
-5. A tracking pan lands on a lunch tray whose compartments, the day's "slots" again, fill on the half-beats (nutrition).
+4. The camera pulls back quickly to the worker, still seated. The topic line rolls inside its band (vascular → habits). The
+   worker stands, steps back from the desk as the stool slides away, and stretches while the camera moves in on them
+   (habits: sitting, standing, movement).
+5. The camera tracks to a lunch tray. Each topic line and the iVein header travel with their own scene, and the tray's
+   compartments, the day's "slots" again, fill on the half-beats (nutrition).
 6. A pink band wipes in Baheya's world and draws the awareness ribbon. «التوعية بسرطان الثدي» and «أهمية الكشف المبكر»
    follow, with an attention pulse on «الكشف».
 7. The blocks close back in under «وسط كل اللي مطلوب منك…», then part on the downbeat to make room for
    «صحتك ليها مكان.». The lockup assembles: a WbS | Breadfast co-brand row, the message, the date, مستنيينكم, and Powered by iVein | بالتعاون مع Baheya. It
-   holds about 7.4 s (25.6 → 33.0 s) over a quietly drifting ghost-slot background.
+   holds about 4.4 s (25.6 → 30.0 s) over a quietly drifting ghost-slot background. The 30 s length was requested;
+   it is shorter than the brief's 6–8 s hold.
 
 ## Voice-over
 `audio-src/vo.wav` is the supplied recording (25.00 s, 24 kHz mono), used as delivered with the same words, order, pitch
@@ -43,7 +47,7 @@ on «لصحتك» (2.70 s) and «صحتك ليها مكان» (23.10 s). Structu
 - The full groove drops on the reveal.
 - The arrangement thins (no claps, sustained keys) under Baheya.
 - A build with the clock returning under «وسط كل اللي مطلوب منك».
-- A drop when the day parts, a marimba hook after the VO, and a final hit at 31.26 s with its natural tail.
+- A drop when the day parts, a marimba hook after the VO, and a final hit at 28.2 s (beat 3 of the last bar) with its natural tail.
 
 There are about ten designed effects, all at turning points: the slot lighting, the slot opening, the 19 lock, the pull-back,
 the food landing, the pink wipe, the parting with a sub boom, and the invitation. `audio-tools/mix.py` ducks the music about 9.5 dB
@@ -57,7 +61,7 @@ npm install
 python3 audio-tools/score.py audio-src                                   # music.wav + sfx.wav
 python3 audio-tools/mix.py audio-src/vo.wav audio-src public/audio/mix.wav
 npm run render                                                           # -> out/WbS-Event-Film_9x16.mp4
-npm run still                                                            # -> out/closing.png (frame 960)
+npm run still                                                            # -> out/closing.png (frame 870)
 npm run studio                                                           # live preview / editing
 ```
 Requires Node 18+, Python 3 with numpy, scipy and soundfile, plus ffmpeg (used for loudness measurement).

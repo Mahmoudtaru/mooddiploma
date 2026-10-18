@@ -1,7 +1,7 @@
 // Film timeline in seconds. Measured from the supplied recording
 // (energy pauses + prefix-scan transcription), shifted by VO_OFFSET.
 export const FPS = 30;
-export const DURATION = 33.0;
+export const DURATION = 30.0;
 export const VO_OFFSET = 0.4;
 
 // Music grid: 117.65 BPM, so downbeats land on «لصحتك» (2.70) and «صحتك ليها مكان» (23.10).

@@ -15,7 +15,7 @@ import soundfile as sf
 from scipy.signal import butter, resample_poly, sosfilt, sosfiltfilt
 
 SR = 48000
-DUR = 33.0
+DUR = 30.0
 N = int(SR * DUR)
 OFFSET = 0.40
 

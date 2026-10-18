@@ -13,7 +13,7 @@ from scipy.signal import butter, fftconvolve, sosfilt
 import soundfile as sf
 
 SR = 48000
-DUR = 33.0
+DUR = 30.0
 N = int(SR * DUR)
 BEAT = 0.51
 BAR = BEAT * 4
@@ -238,7 +238,7 @@ def build():
     bars = []
     t = D0
     i = 0
-    while t < 31.3:
+    while t < 27.3:
         bars.append((i, t))
         t += BAR
         i += 1
@@ -248,27 +248,26 @@ def build():
             sec = 'soft'
         if 21.0 < t0 < 23.0:
             sec = 'build'
-        if t0 > 31.2:
-            sec = 'end'
+        half_bar = t0 > 27.1  # last bar: two beats, then the final hit on beat 3
         chord = PROG[i % 4]
         if sec == 'soft':
             chord = ['G', 'D', 'A', 'Bm'][(i - 7) % 4]
         if sec == 'build':
             chord = 'Em'
         root, kv, pv = CH[chord]
-        if sec == 'end':
-            # final resolution: one confident hit and its natural tail
-            add(drums, kick(1.0), t0)
-            add(drums, hp(rng.standard_normal(int(1.6 * SR)), 5000) * np.exp(-np.arange(int(1.6 * SR)) / SR / 0.5)[:] * 0.12, t0)
-            add(bassb, bass(26 + 12, 1.4, 1.0), t0)
-            add(keyb, keys([62] + kv + [78], 1.6, 1.25), t0)
-            add(padb, pad(CH['D'][2] + [69], 1.4, 1.2, 0.45), t0)
-            add(lead, bell(81, 0.8, 1.1), t0)
-            add(fx, sub_boom(0.7), t0)
-            continue
+        if half_bar:
+            # final resolution on beat 3 of the last bar: one confident hit and its natural tail
+            te = t0 + 2 * BEAT
+            add(drums, kick(1.0), te)
+            add(drums, hp(rng.standard_normal(int(1.6 * SR)), 5000) * np.exp(-np.arange(int(1.6 * SR)) / SR / 0.5)[:] * 0.12, te)
+            add(bassb, bass(26 + 12, 1.3, 1.0), te)
+            add(keyb, keys([62, 66, 69, 74, 78], 1.3, 1.25), te)
+            add(padb, pad(CH['D'][2] + [69], 1.2, 1.2, 0.45), te)
+            add(lead, bell(81, 0.8, 1.0), te)
+            add(fx, sub_boom(0.7), te)
         full = sec == 'groove'
         energy = 1.0 if t0 < 21 else 1.1
-        for s in range(16):
+        for s in range(8 if half_bar else 16):
             ts = t0 + s * S16 + (0.012 if s % 2 else 0)  # light swing
             if sec in ('groove', 'build') and s in (0, 4, 8, 12):
                 add(drums, kick(0.95 * energy), ts)
@@ -292,7 +291,7 @@ def build():
         if sec == 'soft':
             for b in range(4):
                 add(keyb, keys(kv, BEAT * 0.9, 0.7, bright=0.6), t0 + b * BEAT + BEAT / 2)
-        add(padb, pad(pv, BAR, 1.0 if sec != 'soft' else 1.4, bright=0.35 if sec != 'groove' else 0.45), t0)
+        add(padb, pad(pv, BAR / 2 if half_bar else BAR, 1.0 if sec != 'soft' else 1.4, bright=0.35 if sec != 'groove' else 0.45), t0)
         if sec == 'build':
             for k in range(12):  # tightening snare roll into the drop
                 ts = t0 + BAR / 2 + k * (BAR / 2) / 12
@@ -304,9 +303,11 @@ def build():
         # lead hook: only where the voice leaves room (between phrases and after the VO)
         if t0 >= 23.0:
             motif = [(0, 78), (1.5, 81), (2.5, 83), (3.0, 81), (6, 78), (7, 76), (8, 78), (11, 74), (12, 76), (14, 78)]
-            if t0 > 29:
+            if t0 > 27:
                 motif = [(0, 81), (1.5, 83), (2.5, 85), (3.0, 83), (6, 81), (8, 78), (11, 78), (12, 81)]
             for st, m in motif:
+                if half_bar and st >= 8:
+                    continue
                 vel = 0.55 if t0 < 25 else 1.0
                 add(lead, bell(m, vel), t0 + st * S16, pan=0.2)
 
@@ -317,7 +318,7 @@ def build():
     add(fx, whoosh(0.7, 200, 2500, 0.45), 3.45)  # slot opens into the frame
     wood = tick(False, 1.0) * 1.2
     add(fx, lp(wood, 3000), 8.2 - 0.02)  # 19 locks in place
-    add(fx, whoosh(0.85, 150, 1500, 0.4), 12.95)  # camera pulls back
+    add(fx, whoosh(0.6, 150, 1500, 0.4), 12.3)  # camera pulls back
     for k in range(4):
         add(fx, pop(0.8, 480 + 60 * k), 15.36 + k * (BEAT / 2))  # food lands
     add(fx, whoosh(0.55, 500, 6000, 0.45), 16.05)  # pink wipe

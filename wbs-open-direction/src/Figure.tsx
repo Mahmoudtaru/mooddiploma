@@ -22,6 +22,17 @@ const pt = (o: {x: number; y: number}, len: number, deg: number) => ({
 const CAM_CLOSE = {zoom: 2.9, wx: -200, wy: 95, sx: 540, sy: 1330};
 export const CAM_FAR = {zoom: 1.02, wx: -200, wy: -190, sx: 540, sy: 1115};
 export const STOOL = {x: -22, y: 26, w: 150, h: 186};
+// standing: the camera moves in on the worker, who has stepped back from the desk
+const CAM_STAND = {zoom: 1.3, wx: -110, wy: -190, sx: 540, sy: 1160};
+const lerpCam = (a: typeof CAM_FAR, b: typeof CAM_FAR, p: number) => ({
+  zoom: Math.exp(lerp(Math.log(a.zoom), Math.log(b.zoom), p)),
+  wx: lerp(a.wx, b.wx, p),
+  wy: lerp(a.wy, b.wy, p),
+  sx: lerp(a.sx, b.sx, p),
+  sy: lerp(a.sy, b.sy, p),
+});
+// the camera tracks from the desk to the lunch tray (shared with the tray and the titles)
+export const panAt = (t: number) => prog(t, T.nekhtar - 0.1, T.nekhtar + 0.5, eInOut);
 
 // vein centre-line in world units, from ankle (s=0) to knee (s=1)
 const veinX = (y: number, v: number) => {
@@ -44,22 +55,23 @@ export const varicose = (t: number) =>
   prog(t, T.dawaly, T.dawaly + 0.6, eInOut) * (1 - prog(t, T.wiqaya, T.wiqaya + 0.55, eOut));
 
 export const closeUp = (t: number) =>
-  prog(t, T.nefham + 0.4, T.nefham + 1.0, eInOut) * (1 - prog(t, T.wiqaya + 0.5, T.wiqaya + 1.1, eInOut));
+  prog(t, T.nefham + 0.4, T.nefham + 1.0, eInOut) * (1 - prog(t, T.wiqaya + 0.45, T.wiqaya + 0.9, eInOut));
 
 export const Figure: React.FC<{t: number; bodyOp?: number; stoolOp?: number}> = ({t, bodyOp = 1, stoolOp = 1}) => {
   const v = varicose(t);
   // ---- camera
   const c = closeUp(t); // 0 = whole person, 1 = shin close-up
-  const zoom = Math.exp(lerp(Math.log(CAM_FAR.zoom), Math.log(CAM_CLOSE.zoom), c));
-  const pan = prog(t, T.nekhtar + 0.2, T.nekhtar + 0.85, eInOut);
-  const wx = lerp(CAM_FAR.wx, CAM_CLOSE.wx, c);
-  const wy = lerp(CAM_FAR.wy, CAM_CLOSE.wy, c);
-  const sx = lerp(CAM_FAR.sx, CAM_CLOSE.sx, c) + 1150 * pan;
-  const sy = lerp(CAM_FAR.sy, CAM_CLOSE.sy, c);
+  const wide = lerpCam(CAM_FAR, CAM_STAND, prog(t, T.adatna - 0.25, T.adatna + 0.5, eInOut));
+  const cam = lerpCam(wide, CAM_CLOSE, c);
+  const {zoom, wx, wy} = cam;
+  const sx = cam.sx + 1150 * panAt(t);
+  const sy = cam.sy;
 
   // ---- pose
-  const stand = prog(t, T.adatna + 0.1, T.adatna + 0.7, eInOut);
-  const stretch = prog(t, T.adatna + 0.65, T.adatna + 1.05, eOut) * (1 - prog(t, T.nekhtar + 0.3, T.nekhtar + 0.8));
+  const stand = prog(t, T.adatna - 0.2, T.adatna + 0.4, eInOut);
+  const stretch = prog(t, T.adatna + 0.35, T.adatna + 0.75, eOut) * (1 - prog(t, T.nekhtar - 0.05, T.nekhtar + 0.4));
+  const stepBack = 130 * stand; // clear of the desk once upright
+  const stoolBack = 170 * prog(t, T.adatna - 0.3, T.adatna + 0.3, eInOut);
   const thighA = lerp(0, -90, stand);
   const hip = pt(K, THIGH, thighA);
   const torsoA = lerp(-95, -90, stand) - 26 * Math.sin(Math.PI * stand);
@@ -131,7 +143,8 @@ export const Figure: React.FC<{t: number; bodyOp?: number; stoolOp?: number}> = 
           <line x1={-345} y1={-96} x2={-372} y2={-214} stroke={C.navy} strokeWidth={11} strokeLinecap="round" />
           <line x1={-352} y1={-118} x2={-370} y2={-196} stroke={C.sky} strokeWidth={4} strokeLinecap="round" />
         </g>
-        <rect x={STOOL.x} y={STOOL.y} width={STOOL.w} height={STOOL.h} rx={24} fill={C.sky} opacity={stoolOp} />
+        <rect x={STOOL.x + stoolBack} y={STOOL.y} width={STOOL.w} height={STOOL.h} rx={24} fill={C.sky} opacity={stoolOp} />
+        <g transform={`translate(${stepBack} 0)`}>
         <g filter="url(#soft)" opacity={bodyOp}>
           {/* far side limbs */}
           <g>
@@ -173,6 +186,7 @@ export const Figure: React.FC<{t: number; bodyOp?: number; stoolOp?: number}> = 
           <ellipse key={i} cx={p.x} cy={p.y} rx={1.5 * pz} ry={3.2 * pz} fill={mix('#FFFFFF', '#CBB8F0', v)}
             opacity={fade * prog(t, T.nefham + 0.8, T.nefham + 1.0)} />
         ))}
+        </g>
       </g>
     </svg>
   );

@@ -4,7 +4,7 @@ import {C, FONT} from './theme';
 import {FPS, HALF, T} from './timing';
 import {clamp01, eIn, eInOut, eOut, eSoft, lerp, mix, prog, springAt} from './motion';
 import {BlockView, LANE_W, makeLane} from './Blocks';
-import {CAM_FAR, closeUp, Figure, STOOL} from './Figure';
+import {CAM_FAR, closeUp, Figure, panAt, STOOL} from './Figure';
 import {Ribbon, Tray} from './Props';
 
 // ---------------------------------------------------------------- type helpers
@@ -17,10 +17,11 @@ type TxtProps = {
   hide?: number; // 0..1, mask continues leftwards and removes the line
   op?: number;
   dy?: number;
+  dx?: number;
   scale?: number;
   children: React.ReactNode;
 };
-const Txt: React.FC<TxtProps> = ({y, size, weight = 700, color = C.navy, reveal = 1, hide = 0, op = 1, dy = 0, scale = 1, children}) => {
+const Txt: React.FC<TxtProps> = ({y, size, weight = 700, color = C.navy, reveal = 1, hide = 0, op = 1, dy = 0, dx = 0, scale = 1, children}) => {
   if (op <= 0 || reveal <= 0 || hide >= 1) return null;
   return (
     <div
@@ -33,7 +34,7 @@ const Txt: React.FC<TxtProps> = ({y, size, weight = 700, color = C.navy, reveal 
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        transform: `translateY(${dy}px) scale(${scale})`,
+        transform: `translate(${dx}px, ${dy}px) scale(${scale})`,
         opacity: op,
       }}
     >
@@ -182,8 +183,9 @@ export const Film: React.FC = () => {
   const chipIn = springAt(t, T.bed3am, 14, 150);
   const iveinIn = prog(t, T.ivein - 0.12, T.ivein + 0.28, eOut);
   const chipUp = prog(t, T.etnein - 0.45, T.etnein + 0.12, eInOut);
-  const chipOut = prog(t, T.nekhtar + 0.2, T.nekhtar + 0.55, eIn);
-  const chipCy = lerp(1185, 315, chipUp) - 120 * chipOut;
+  const pan = panAt(t); // the header leaves with the desk scene
+  const chipOut = pan;
+  const chipCy = lerp(1185, 315, chipUp);
   const chipScale = (0.86 + 0.14 * chipIn) * lerp(1, 0.84, chipUp);
 
   // --- date
@@ -207,11 +209,16 @@ export const Film: React.FC = () => {
   const bodyOp = prog(t, T.october + 0.75, T.october + 1.2, eSoft);
 
   // --- topic titles (one anchor line that changes its words)
-  const titleA = {reveal: prog(t, T.nefham + 0.0, T.nefham + 0.45, eOut), hide: prog(t, T.nraja3 + 0.35, T.nraja3 + 0.65, eIn)};
-  const titleB = {reveal: prog(t, T.nraja3 + 0.55, T.nraja3 + 0.95, eOut), hide: prog(t, T.nekhtar + 0.1, T.nekhtar + 0.38, eIn)};
-  const titleC = {reveal: prog(t, T.nekhtar + 0.3, T.nekhtar + 0.72, eOut), hide: prog(t, T.ma3 - 0.05, T.ma3 + 0.25, eIn)};
-  const sub = {reveal: prog(t, T.dawaly + 0.05, T.dawaly + 0.5, eOut), op: 1 - prog(t, T.nraja3 + 0.2, T.nraja3 + 0.45)};
-  const pan = prog(t, T.nekhtar + 0.2, T.nekhtar + 0.85, eInOut);
+  // vascular → habits: the line rolls up with the camera pulling back
+  // (inside a clipped band, so the outgoing line leaves before the new one arrives)
+  const rollOut = prog(t, T.wiqaya + 0.4, T.wiqaya + 0.68, eIn);
+  const rollSub = prog(t, T.wiqaya + 0.28, T.wiqaya + 0.46, eIn);
+  const roll = prog(t, T.wiqaya + 0.6, T.wiqaya + 0.98, eOut);
+  const titleA = {reveal: prog(t, T.nefham + 0.0, T.nefham + 0.45, eOut), dy: -130 * rollOut};
+  const sub = {reveal: prog(t, T.dawaly + 0.05, T.dawaly + 0.5, eOut), dy: -30 * rollSub, op: 1 - rollSub};
+  // habits → nutrition: each line travels with its own scene during the pan
+  const titleB = {dy: 150 * (1 - roll), op: roll > 0 ? 1 : 0, dx: 1150 * pan};
+  const titleC = {dx: -1150 * (1 - pan), op: prog(t, T.nekhtar - 0.1, T.nekhtar + 0.1), hide: prog(t, T.ma3 - 0.05, T.ma3 + 0.25, eIn)};
 
   // --- Baheya world: diagonal wipe led by a pink band
   const wipe = prog(t, T.ma3 - 0.42, T.ma3 + 0.12, eInOut);
@@ -305,14 +312,16 @@ export const Film: React.FC = () => {
       )}
 
       {/* ============ nutrition tray tracks in */}
-      {t >= T.nekhtar + 0.2 && t < T.ma3 + 0.4 && <Tray t={t} x={540 - 1150 * (1 - pan)} />}
+      {t >= T.nekhtar - 0.1 && t < T.ma3 + 0.4 && <Tray t={t} x={540 - 1150 * (1 - pan)} />}
 
       {/* topic anchor line */}
       {t >= T.nefham - 0.1 && t < T.ma3 + 0.4 && (
         <>
-          <Txt y={470} size={66} {...titleA}>صحة الأوعية الدموية</Txt>
-          <Txt y={556} size={46} weight={500} color={C.iveinIndigo} {...sub}>الدوالي: أعراضها والوقاية</Txt>
-          <Txt y={470} size={66} {...titleB}>عادات صحية أثناء الشغل</Txt>
+          <AbsoluteFill style={{clipPath: 'inset(412px -2000px 1330px -2000px)'}}>
+            <Txt y={470} size={66} {...titleA}>صحة الأوعية الدموية</Txt>
+            <Txt y={556} size={46} weight={500} color={C.iveinIndigo} {...sub}>الدوالي: أعراضها والوقاية</Txt>
+            <Txt y={470} size={66} {...titleB}>عادات صحية أثناء الشغل</Txt>
+          </AbsoluteFill>
           <Txt y={600} size={66} {...titleC}>
             <span style={{color: C.wbsTeal}}>تغذية صحية</span> خلال يومك
           </Txt>
@@ -321,8 +330,8 @@ export const Film: React.FC = () => {
 
       {/* Powered by iVein: introduced with «بدعم من آيفين», carried into the vascular passage */}
       {t >= T.bed3am && chipOut < 1 && (
-        <div style={{position: 'absolute', left: 540 - 175, top: chipCy - 112, width: 350, height: 224, transform: `scale(${chipScale})`,
-          opacity: chipIn * (1 - chipOut), background: '#FFFFFF', borderRadius: 36, border: `2px solid rgba(0,165,223,0.30)`,
+        <div style={{position: 'absolute', left: 540 - 175, top: chipCy - 112, width: 350, height: 224, transform: `translateX(${1150 * pan}px) scale(${chipScale})`,
+          opacity: chipIn, background: '#FFFFFF', borderRadius: 36, border: `2px solid rgba(0,165,223,0.30)`,
           boxShadow: '0 18px 40px rgba(16,47,104,0.10)'}}>
           <div style={{position: 'absolute', top: 22, width: '100%', textAlign: 'center', fontSize: 34, fontWeight: 500, color: C.iveinIndigo, letterSpacing: 0.5}}>
             Powered by
