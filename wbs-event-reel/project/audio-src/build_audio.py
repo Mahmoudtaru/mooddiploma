@@ -124,7 +124,7 @@ def main():
 
     music = load(ROOT / 'audio-src/music_bed.wav', 2)
     sf.write(stems / '_m.wav', music, SR, subtype='FLOAT'); mI, _, _ = loudness(stems / '_m.wav'); (stems / '_m.wav').unlink()
-    music *= db((vI - 12.5) - mI)  # bed sits ~12.5 LU under the voice before ducking
+    music *= db((vI - 6.0) - mI)  # bed sits ~6 LU under the voice in the gaps
 
     # Voice-driven ducking: carve the speech band harder than lows/air, smooth attack/release (no pumping).
     win = int(0.02 * SR)
@@ -134,13 +134,13 @@ def main():
     for i, v in enumerate(active):
         s = (a_att if v > s else a_rel) * s + (1 - (a_att if v > s else a_rel)) * v
         g[i] = s
-    mid_gain = db(-7.0 * g); rest_gain = db(-2.5 * g)
+    mid_gain = db(-5.0 * g); rest_gain = db(-1.5 * g)  # ≈ -11 LU under words, speech band carved
     sos_lo = butter(2, 280, 'lowpass', fs=SR, output='sos'); sos_hi = butter(2, 4200, 'highpass', fs=SR, output='sos')
     lo = sosfiltfilt(sos_lo, music, axis=0); hi = sosfiltfilt(sos_hi, music, axis=0); mid = music - lo - hi
     music = (lo + hi) * rest_gain[:, None] + mid * mid_gain[:, None]
     # clean edges: 15 ms fade-in, natural decay into a 0.7 s tail fade to digital silence at the last frame
     fi = int(0.015 * SR); music[:fi] *= np.linspace(0, 1, fi)[:, None]
-    fo0 = int((DUR - 0.7) * SR); music[fo0:] *= (np.cos(np.linspace(0, np.pi / 2, N - fo0)) ** 2)[:, None]
+    fo0 = int((DUR - 1.2) * SR); music[fo0:] *= (np.cos(np.linspace(0, np.pi / 2, N - fo0)) ** 2)[:, None]
     sf.write(stems / 'music_ducked.wav', music.astype(np.float32), SR, subtype='FLOAT')
 
     fx = np.zeros((N, 2), np.float32)

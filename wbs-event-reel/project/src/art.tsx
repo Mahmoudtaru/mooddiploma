@@ -17,15 +17,16 @@ export const Background: React.FC<{t: number; pink: number}> = ({t, pink}) => {
 					<stop offset="1" stopColor={fillB} />
 				</linearGradient>
 			</defs>
-			<g transform={`translate(${d1 * 0.6}, ${d1})`}>
-				<path d="M0 0 H700 C600 80 470 120 330 190 C200 255 100 330 0 470 Z" fill={`url(#g${fillA})`} />
-				<path d="M-20 520 C110 330 230 250 380 175 C520 105 640 60 760 -20" fill="none" stroke={lineA} strokeWidth={2.5} opacity={0.55} />
-				<path d="M-20 580 C130 380 260 300 420 220 C560 150 690 95 820 10" fill="none" stroke={lineB} strokeWidth={2} opacity={0.35} />
+			{/* corner accents kept inside the margins: top-left above y≈270, bottom-right below y≈1600 */}
+			<g transform={`translate(${d1 * 0.5}, ${d1 * 0.4})`}>
+				<path d="M0 0 H560 C470 58 360 92 250 136 C150 176 70 214 0 270 Z" fill={`url(#g${fillA})`} />
+				<path d="M-20 300 C90 222 190 176 300 132 C420 84 520 46 600 -10" fill="none" stroke={lineA} strokeWidth={2.5} opacity={0.55} />
+				<path d="M-20 336 C100 250 210 202 330 156 C450 110 560 70 650 6" fill="none" stroke={lineB} strokeWidth={2} opacity={0.3} />
 			</g>
-			<g transform={`translate(${d2 * 0.6}, ${d2})`}>
-				<path d="M1080 1920 H330 C450 1820 600 1780 760 1700 C890 1635 990 1550 1080 1420 Z" fill={`url(#g${fillA})`} />
-				<path d="M1100 1370 C990 1540 870 1630 720 1700 C580 1765 450 1810 300 1940" fill="none" stroke={lineA} strokeWidth={2.5} opacity={0.55} />
-				<path d="M1100 1300 C980 1490 850 1590 700 1660 C560 1725 420 1780 260 1930" fill="none" stroke={lineB} strokeWidth={2} opacity={0.35} />
+			<g transform={`translate(${d2 * 0.5}, ${d2 * 0.4})`}>
+				<path d="M1080 1920 H500 C590 1858 700 1826 810 1780 C920 1734 1005 1688 1080 1612 Z" fill={`url(#g${fillA})`} />
+				<path d="M1100 1588 C1010 1680 910 1740 790 1790 C670 1840 560 1880 460 1940" fill="none" stroke={lineA} strokeWidth={2.5} opacity={0.55} />
+				<path d="M1100 1552 C1000 1652 890 1716 770 1764 C650 1812 530 1856 420 1930" fill="none" stroke={lineB} strokeWidth={2} opacity={0.3} />
 			</g>
 		</svg>
 	);
@@ -189,8 +190,11 @@ export const DeskScene: React.FC<{
 	const L = laptopLift;
 	return (
 		<svg viewBox="0 0 800 800" width={800} height={800} style={{overflow: 'visible'}}>
-			{/* floor */}
+			{/* floor + soft contact shadows for depth */}
 			<path d="M20 762 H780" stroke={C.paleLine} strokeWidth={6} strokeLinecap="round" />
+			<ellipse cx={210} cy={764} rx={190} ry={12} fill={C.navy} opacity={0.06} />
+			<ellipse cx={(pose.ankle[0] + 560) / 2} cy={764} rx={150} ry={12} fill={C.navy} opacity={0.08} />
+			<path d="M40 438 H380 V452 H40 Z" fill={C.pale} />
 			{/* desk */}
 			<path d="M40 430 H380" stroke={C.navy} strokeWidth={14} strokeLinecap="round" />
 			<path d="M72 436 V760 M350 436 V760" stroke={C.navy} strokeWidth={10} strokeLinecap="round" />
@@ -219,6 +223,10 @@ export const DeskScene: React.FC<{
 			<path d={seg([pose.hip, pose.shoulder])} fill="none" stroke={C.sky} strokeWidth={66} strokeLinecap="round" />
 			{/* head */}
 			<circle cx={pose.head[0]} cy={pose.head[1]} r={46} fill={C.skin} stroke={C.navy} strokeWidth={7} />
+			<path
+				d={`M${pose.head[0] - 47} ${pose.head[1] - 2} A47 47 0 0 1 ${pose.head[0] + 47} ${pose.head[1] - 2} Q${pose.head[0] + 6} ${pose.head[1] - 26} ${pose.head[0] - 47} ${pose.head[1] - 2} Z`}
+				fill={C.navy}
+			/>
 			{/* near arm */}
 			<path d={seg([pose.shoulder, pose.elbow, pose.hand])} fill="none" stroke={C.sky} strokeWidth={28} strokeLinecap="round" strokeLinejoin="round" />
 			<path d={seg([pose.shoulder, pose.elbow, pose.hand])} fill="none" stroke={C.navy} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" opacity={0.0} />
@@ -238,6 +246,7 @@ export const VEIN_B2 = 'M224 338 C256 312 270 290 274 262';
 
 export const Leg: React.FC<{draw: number; veinP: number; flowT: number; ring: number}> = ({draw, veinP, flowT, ring}) => (
 	<svg viewBox="0 0 400 960" width={400} height={960} style={{overflow: 'visible'}}>
+		<ellipse cx={160} cy={892} rx={150} ry={14} fill={C.navy} opacity={0.07 * Math.min(1, draw * 1.4)} />
 		<path d={LEG_OUTLINE + ' Z'} fill={C.pale} opacity={Math.min(1, draw * 1.4)} />
 		<Drawn d={LEG_OUTLINE} p={draw} stroke={C.navy} width={8} />
 		<Drawn d={VEIN} p={veinP} stroke={C.sky} width={10} />

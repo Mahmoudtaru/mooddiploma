@@ -19,7 +19,7 @@ const Hook: React.FC = () => {
 	const heart = prog(t, 2.3, 0.55, easeInOut);
 	const pulse = prog(t, 2.55, 0.5, easeInOut);
 	return (
-		<Scene from={S.hook[0]} to={S.hook[1]}>
+		<Scene from={S.hook[0]} to={S.hook[1]} enter={false}>
 			<At x={CX} y={380}>
 				<Reveal at={-0.45}>
 					<T size={100} weight={800}>وسط يوم الشغل…</T>
@@ -153,7 +153,7 @@ const Habits: React.FC = () => {
 	const pose = lerpPose(lerpPose(POSES.slumped, POSES.upright, straighten), POSES.standing, stand);
 	const enter = prog(t, 12.2, 0.5, easeOut);
 	return (
-		<Scene from={S.habits[0]} to={S.habits[1]} exit={0.28}>
+		<Scene from={S.habits[0]} to={S.habits[1]}>
 			<At x={CX} y={355}>
 				<Reveal at={12.24}>
 					<T size={96} weight={800}>عادات صحية</T>
@@ -179,7 +179,7 @@ const Nutrition: React.FC = () => {
 	const items = [14.32, 14.42, 14.5, 14.58].map((s) => prog(t, s, 0.42, easeSettle));
 	const glass = prog(t, 14.62, 0.5, easeOut);
 	return (
-		<Scene from={S.nutrition[0]} to={S.nutrition[1]} exit={0.28}>
+		<Scene from={S.nutrition[0]} to={S.nutrition[1]}>
 			<At x={CX} y={355}>
 				<Reveal at={14.1}>
 					<T size={96} weight={800}>تغذية صحية</T>
@@ -269,7 +269,7 @@ const Pause: React.FC = () => {
 	const t = useTime();
 	const line = prog(t, 20.95, 1.4, easeInOut);
 	return (
-		<Scene from={S.pause[0]} to={S.pause[1]} exit={0.3} exitLift={140}>
+		<Scene from={S.pause[0]} to={S.pause[1]} exit={0.4}>
 			<At x={CX} y={850}>
 				<Reveal at={20.7}>
 					<T size={100} weight={800} color="#FFFFFF">وسط كل اللي</T>
@@ -291,57 +291,64 @@ const Pause: React.FC = () => {
 
 const Close: React.FC = () => {
 	const t = useTime();
+	// Beat 1: «صحتك ليها مكان.» gets the screen to itself, where the navy line sat.
+	// Beat 2 (from 23.7): the message rises to the top and the invitation, date and partners
+	// build beneath it, so the last card is complete by ~25.3 s and holds to the end.
+	const up = prog(t, 23.7, 0.65, easeInOut);
+	const msgScale = mix(1.1, 1, up);
 	const row = (s: number) => {
-		const p = prog(t, s, 0.6, easeSettle);
-		return {opacity: p, transform: `translate(-50%, -50%) translateY(${30 * (1 - p)}px)`};
+		const p = prog(t, s, 0.65, easeSettle);
+		return {opacity: p, transform: `translate(-50%, -50%) translateY(${34 * (1 - p)}px)`};
 	};
 	return (
-		<Scene from={S.close[0]} to={S.close[1] + 1} exit={0}>
-			<At x={CX} y={370}>
-				<Reveal at={22.66}>
-					<T size={156} weight={800}>صحتك</T>
-				</Reveal>
-			</At>
-			<At x={CX} y={548}>
-				<Reveal at={A.lihaMakan - 0.12}>
-					<T size={146} weight={800} color={C.sky}>ليها مكان.</T>
-				</Reveal>
-			</At>
+		<Scene from={S.close[0]} to={S.close[1] + 1} exit={0} enter={false}>
+			<div style={{position: 'absolute', inset: 0, transform: `translateY(${mix(280, 0, up)}px) scale(${msgScale})`, transformOrigin: `${CX}px 460px`}}>
+				<At x={CX} y={370}>
+					<Reveal at={22.66}>
+						<T size={156} weight={800}>صحتك</T>
+					</Reveal>
+				</At>
+				<At x={CX} y={548}>
+					<Reveal at={A.lihaMakan - 0.12}>
+						<T size={146} weight={800} color={C.sky}>ليها مكان.</T>
+					</Reveal>
+				</At>
+			</div>
 			<At x={CX} y={728}>
-				<Reveal at={23.62} rise={24}>
+				<Reveal at={24.22} rise={28}>
 					<T size={74} weight={800}>مستنيينكم</T>
 				</Reveal>
 			</At>
 			<At x={CX} y={838}>
-				<Reveal at={23.72} dir="none" rise={18}>
+				<Reveal at={24.34} dir="none" rise={20}>
 					<div dir="rtl" style={{background: C.pale, borderRadius: 999, padding: '6px 34px 10px', fontFamily: FONT_BODY, fontWeight: 600, fontSize: 40, color: C.navy, whiteSpace: 'nowrap', lineHeight: 1.5}}>
 						الاثنين <span style={{fontFamily: 'Alexandria', fontWeight: 700, color: C.sky}}>19</span> أكتوبر
 					</div>
 				</Reveal>
 			</At>
-			{/* partner arrangement: initiative at the workplace, then supporting partners */}
-			<At x={700} y={1085} style={row(23.28)}>
+			{/* partner arrangement: the initiative at the workplace, then the supporting partners */}
+			<At x={700} y={1085} style={row(24.42)}>
 				<Logo name="wbs" width={232} />
 			</At>
-			<At x={530} y={1090} style={row(23.34)}>
+			<At x={530} y={1090} style={row(24.47)}>
 				<Label size={34}>في</Label>
 			</At>
-			<At x={340} y={1090} style={row(23.4)}>
+			<At x={340} y={1090} style={row(24.52)}>
 				<Logo name="breadfast" width={290} />
 			</At>
-			<At x={660} y={1262} style={row(23.48)}>
+			<At x={660} y={1262} style={row(24.6)}>
 				<Label size={33}>بالتعاون مع</Label>
 			</At>
-			<At x={660} y={1352} style={row(23.52)}>
+			<At x={660} y={1352} style={row(24.64)}>
 				<Logo name="baheya" width={244} />
 			</At>
-			<At x={352} y={1262} style={row(23.56)}>
+			<At x={352} y={1262} style={row(24.68)}>
 				<Label size={33} dir="ltr">Powered by</Label>
 			</At>
-			<At x={352} y={1352} style={row(23.6)}>
+			<At x={352} y={1352} style={row(24.72)}>
 				<Logo name="ivein" width={206} />
 			</At>
-			<div style={{position: 'absolute', left: CX - 1, top: 1232, width: 2, height: 190, background: C.paleLine, opacity: prog(t, 23.5, 0.5)}} />
+			<div style={{position: 'absolute', left: CX - 1, top: 1232, width: 2, height: 190, background: C.paleLine, opacity: prog(t, 24.65, 0.5)}} />
 		</Scene>
 	);
 };

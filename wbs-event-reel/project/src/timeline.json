@@ -1,39 +1,170 @@
 {
-  "_note": "All times in seconds, measured from public/audio/voiceover.wav (25.000 s, 24 kHz mono). Speech boundaries from an RMS envelope (10 ms, -40 dBFS) plus whisper-small segment transcription. Brand-word times inside a phrase are estimates bounded by measured micro-pauses.",
-  "duration": 25.0,
+  "_note": "All times in seconds, measured from public/audio/voiceover.wav (25.000 s, 24 kHz mono). Speech boundaries from an RMS envelope (10 ms, -40 dBFS) plus whisper-small segment transcription. Brand-word times inside a phrase are estimates bounded by measured micro-pauses. Video runs 2 s past the 25.000 s recording so the closing card can be read; the voice is unchanged and the music resolves over the extra hold.",
+  "duration": 27.0,
   "speech": [
-    {"s": 0.29,  "e": 1.44,  "text": "وسط يوم الشغل…"},
-    {"s": 1.79,  "e": 2.97,  "text": "خُد وقت لصحتك."},
-    {"s": 3.57,  "e": 6.72,  "text": "مبادرة وقفتك بصحتك في Breadfast، بدعم من آيفين،"},
-    {"s": 7.12,  "e": 8.81,  "text": "الاتنين تسعتاشر أكتوبر."},
-    {"s": 9.56,  "e": 11.94, "text": "نفهم أعراض الدوالي وطرق الوقاية،"},
-    {"s": 12.41, "e": 13.90, "text": "نراجع عاداتنا أثناء الشغل،"},
-    {"s": 14.16, "e": 15.44, "text": "نختار أكل يناسب يومنا."},
-    {"s": 15.97, "e": 16.80, "text": "مع بهية،"},
-    {"s": 17.09, "e": 20.15, "text": "هنتكلم عن سرطان الثدي وأهمية الكشف المبكر."},
-    {"s": 20.73, "e": 22.45, "text": "وسط كل اللي مطلوب منك…"},
-    {"s": 22.70, "e": 23.63, "text": "صحتك ليها مكان."},
-    {"s": 24.15, "e": 24.77, "text": "مستنيينكم."}
+    {
+      "s": 0.29,
+      "e": 1.44,
+      "text": "وسط يوم الشغل…"
+    },
+    {
+      "s": 1.79,
+      "e": 2.97,
+      "text": "خُد وقت لصحتك."
+    },
+    {
+      "s": 3.57,
+      "e": 6.72,
+      "text": "مبادرة وقفتك بصحتك في Breadfast، بدعم من آيفين،"
+    },
+    {
+      "s": 7.12,
+      "e": 8.81,
+      "text": "الاتنين تسعتاشر أكتوبر."
+    },
+    {
+      "s": 9.56,
+      "e": 11.94,
+      "text": "نفهم أعراض الدوالي وطرق الوقاية،"
+    },
+    {
+      "s": 12.41,
+      "e": 13.9,
+      "text": "نراجع عاداتنا أثناء الشغل،"
+    },
+    {
+      "s": 14.16,
+      "e": 15.44,
+      "text": "نختار أكل يناسب يومنا."
+    },
+    {
+      "s": 15.97,
+      "e": 16.8,
+      "text": "مع بهية،"
+    },
+    {
+      "s": 17.09,
+      "e": 20.15,
+      "text": "هنتكلم عن سرطان الثدي وأهمية الكشف المبكر."
+    },
+    {
+      "s": 20.73,
+      "e": 22.45,
+      "text": "وسط كل اللي مطلوب منك…"
+    },
+    {
+      "s": 22.7,
+      "e": 23.63,
+      "text": "صحتك ليها مكان."
+    },
+    {
+      "s": 24.15,
+      "e": 24.77,
+      "text": "مستنيينكم."
+    }
   ],
   "anchors": {
-    "wbsWord": 3.97, "breadfastWord": 5.05, "iveinPhrase": 5.76, "iveinWord": 6.25,
-    "dateDay": 7.12, "dateNum": 7.79, "dateMonth": 8.45,
-    "dawaly": 10.0, "prevention": 10.6, "chestBreast": 17.9, "earlyDetection": 18.65,
+    "wbsWord": 3.97,
+    "breadfastWord": 5.05,
+    "iveinPhrase": 5.76,
+    "iveinWord": 6.25,
+    "dateDay": 7.12,
+    "dateNum": 7.79,
+    "dateMonth": 8.45,
+    "dawaly": 10.0,
+    "prevention": 10.6,
+    "chestBreast": 17.9,
+    "earlyDetection": 18.65,
     "lihaMakan": 23.15
   },
   "scenes": {
-    "hook": [0, 3.3], "collab": [3.3, 9.2], "vascular": [9.2, 12.2], "habits": [12.2, 14.05],
-    "nutrition": [14.05, 15.75], "baheya": [15.75, 20.45], "pause": [20.45, 22.55], "close": [22.55, 25.0]
+    "hook": [
+      0,
+      3.45
+    ],
+    "collab": [
+      3.1,
+      9.35
+    ],
+    "vascular": [
+      9.0,
+      12.3
+    ],
+    "habits": [
+      11.95,
+      14.15
+    ],
+    "nutrition": [
+      13.85,
+      15.85
+    ],
+    "baheya": [
+      15.55,
+      20.5
+    ],
+    "pause": [
+      20.45,
+      22.55
+    ],
+    "close": [
+      22.55,
+      27.0
+    ]
   },
   "sfx": [
-    {"at": 1.80, "kind": "draw",    "gain_db": -24, "why": "health path starts drawing out of the work day"},
-    {"at": 6.28, "kind": "arrive",  "gain_db": -23, "why": "Powered by iVein settles: collaboration arrangement complete"},
-    {"at": 9.62, "kind": "sweep",   "gain_db": -26, "why": "venous flow line reveals upward"},
-    {"at": 12.72,"kind": "move",    "gain_db": -24, "why": "posture straightens"},
-    {"at": 13.25,"kind": "move",    "gain_db": -26, "why": "figure stands and stretches"},
-    {"at": 14.62,"kind": "place",   "gain_db": -23, "why": "plate ingredients settle"},
-    {"at": 15.80,"kind": "air",     "gain_db": -25, "why": "pink partner transition into Baheya"},
-    {"at": 20.42,"kind": "swell",   "gain_db": -27, "why": "navy surface rises for the quiet setup"},
-    {"at": 22.62,"kind": "accent",  "gain_db": -23, "why": "light returns: health has a place"}
+    {
+      "at": 1.8,
+      "kind": "draw",
+      "gain_db": -29,
+      "why": "health path starts drawing out of the work day"
+    },
+    {
+      "at": 6.28,
+      "kind": "arrive",
+      "gain_db": -28,
+      "why": "Powered by iVein settles: collaboration arrangement complete"
+    },
+    {
+      "at": 9.62,
+      "kind": "sweep",
+      "gain_db": -31,
+      "why": "venous flow line reveals upward"
+    },
+    {
+      "at": 12.72,
+      "kind": "move",
+      "gain_db": -29,
+      "why": "posture straightens"
+    },
+    {
+      "at": 13.25,
+      "kind": "move",
+      "gain_db": -31,
+      "why": "figure stands and stretches"
+    },
+    {
+      "at": 14.62,
+      "kind": "place",
+      "gain_db": -28,
+      "why": "plate ingredients settle"
+    },
+    {
+      "at": 15.8,
+      "kind": "air",
+      "gain_db": -30,
+      "why": "pink partner transition into Baheya"
+    },
+    {
+      "at": 20.42,
+      "kind": "swell",
+      "gain_db": -32,
+      "why": "navy surface rises for the quiet setup"
+    },
+    {
+      "at": 22.62,
+      "kind": "accent",
+      "gain_db": -28,
+      "why": "light returns: health has a place"
+    }
   ]
 }

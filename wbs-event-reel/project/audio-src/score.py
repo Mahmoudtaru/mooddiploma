@@ -184,7 +184,7 @@ def main(plan_path, out):
         x = sosfilt(butter(1, 5500, fs=SR, output='sos'), r.randn(n) * np.exp(-t / 0.75)); x[0] = 0; return x / np.sqrt((x ** 2).sum())
     L2 = L * 0.6 + fftconvolve(L, ir(1))[:N] * 0.9; R2 = R * 0.6 + fftconvolve(R, ir(2))[:N] * 0.9
     sos = butter(2, 12000, fs=SR, output="sos"); L2 = sosfilt(sos, L2); R2 = sosfilt(sos, R2)  # gentle top; the voice band is carved in the mix
-    fade = np.ones(N); fo = int(1.6 * SR); fade[-fo:] = np.linspace(1, 0, fo) ** 2; fi = int(0.4 * SR); fade[:fi] = np.linspace(0, 1, fi)
+    fade = np.ones(N); fo = int(1.6 * SR); fade[-fo:] = np.linspace(1, 0, fo) ** 2; fi = int(0.03 * SR); fade[:fi] = np.linspace(0, 1, fi)
     L2 *= fade; R2 *= fade; pk = max(np.abs(L2).max(), np.abs(R2).max()); L2 *= 0.85 / pk; R2 *= 0.85 / pk
     with wave.open(out, 'wb') as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.stack([L2, R2], 1) * 32767).astype('<i2').tobytes())
