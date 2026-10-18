@@ -1,0 +1,59 @@
+{
+  "package": "WbS open-direction production kit",
+  "event_date": "2026-10-19",
+  "onscreen_date": "الاثنين 19 أكتوبر",
+  "canvas": {
+    "width": 1080,
+    "height": 1920
+  },
+  "target_duration_seconds": [
+    32,
+    35
+  ],
+  "voiceover": {
+    "included": false,
+    "approximate_seconds": 25,
+    "instruction": "User supplies actual recording separately; recording takes priority over helper transcript."
+  },
+  "assets": [
+    {
+      "path": "assets/wbs-logo.png",
+      "role": "Initiative: full two-line وقفتك بصحتك mark",
+      "width": 869,
+      "height": 751,
+      "mode": "RGBA",
+      "sha256": "63ce5a9c90b5ba7b71c3031a2214933f05c4f54acd68c207d85b00a2d5a7707b",
+      "instruction": "Use original unchanged; respect native detail and optical sizing."
+    },
+    {
+      "path": "assets/ivein-logo.png",
+      "role": "Medical backing: Powered by iVein; vascular health",
+      "width": 305,
+      "height": 158,
+      "mode": "RGBA",
+      "sha256": "a902c8b093d56bb497ced09b773d1719f05d8a7a058a4851f2109128c28e3293",
+      "instruction": "Use original unchanged; respect native detail and optical sizing."
+    },
+    {
+      "path": "assets/breadfast-logo.png",
+      "role": "Workplace event collaboration",
+      "width": 404,
+      "height": 127,
+      "mode": "RGBA",
+      "sha256": "4e706c52e9fe1fc8af39375d166b81aa4920c4547d2d2e78d41f09971518ad16",
+      "instruction": "Use original unchanged; respect native detail and optical sizing."
+    },
+    {
+      "path": "assets/baheya-logo.png",
+      "role": "Breast-cancer awareness and early detection",
+      "width": 319,
+      "height": 164,
+      "mode": "RGBA",
+      "sha256": "a280baf53313d8d6e2f026454e28000a2c69964839cb3dacf99aa9b6d5d1f3bc",
+      "instruction": "Use original unchanged; respect native detail and optical sizing."
+    }
+  ],
+  "visual_references_included": false,
+  "master_prompt": "WbS-Open-Direction-Master-Prompt.txt",
+  "creative_direction": "Original evolving motion; selective on-screen copy; comfortable pacing; partner-specific identity passages."
+}

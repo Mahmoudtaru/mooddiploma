@@ -1,0 +1,7 @@
+node_modules/
+out/stills/
+out/draft.mp4
+audio-src/music.wav
+audio-src/sfx.wav
+audio-src/qa_*.wav
+qa/

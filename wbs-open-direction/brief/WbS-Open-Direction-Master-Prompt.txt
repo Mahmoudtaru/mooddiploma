@@ -1,0 +1,186 @@
+OPEN-DIRECTION PRODUCTION PROMPT
+وقفتك بصحتك × Breadfast × بهية — Powered by iVein
+Original premium motion film | Arabic | Vertical 9:16 | Revised motion and pacing direction
+
+YOUR ASSIGNMENT
+
+Act as the creative director, motion designer, editor and sound designer for a finished event announcement. Create and render one original, polished motion-graphics film using the supplied official logos, the separately uploaded recorded voice-over, and the factual content below. Own the creative decisions and execute the film, rather than returning a proposal for someone else to animate.
+
+This is an open creative brief. There is deliberately NO storyboard, shot list, layout reference, banner or visual template in this package. Do not request one. The logos establish identity and partner attribution; they are not layout templates. Choose the visual concept, graphic language, scene structure, staging, transitions and animation yourself. Aim for the craft and restraint of a premium commissioned campaign, with enough warmth and energy to feel human and relevant to an actual workday.
+
+Read the full brief and inspect the assets before production. Privately consider a few genuinely different treatments, select the strongest feasible one, and build it without asking the user to approve another storyboard. Do not spend the assignment producing comparison boards. The deliverable is the actual finished video plus its editable project.
+
+1. PURPOSE, AUDIENCE AND EMOTIONAL RESULT
+
+Announce a workplace health event at Breadfast under the initiative «وقفتك بصحتك», Powered by iVein, with Baheya participating in breast-cancer awareness and early-detection education. The audience is working adults viewing the announcement on Instagram and LinkedIn. They should understand that there is room for their health within a demanding day, recognize the collaboration and its topics, and remember the event date.
+
+The film should move from the pressure and repetition of a workday toward attention, movement, clarity and care. It should feel contemporary, optimistic and confident. It must carry advertising momentum without becoming noisy, frantic or emotionally heavy. Avoid a clinical lecture, a sentimental hospital appeal, a generic corporate explainer or a template slideshow.
+
+The desired opening idea is a subdued or dark working-day atmosphere that becomes illuminated around «وقت لصحتك». Interpret that concept inventively: light, typography, objects, space, color or rhythm can perform the transformation. It does not prescribe a black title card, a particular character, a lighting setup or a fixed duration. Establish interest quickly; do not make the opening a long empty wait.
+
+2. INPUTS AND SOURCE PRIORITY
+
+The supplied package contains:
+• assets/wbs-logo.png — the full two-line «وقفتك بصحتك» initiative mark.
+• assets/ivein-logo.png — official iVein logo.
+• assets/breadfast-logo.png — official Breadfast logo.
+• assets/baheya-logo.png — official Baheya logo, including its supplied tagline.
+• reference-transcript.txt — a text aid for understanding and matching the narration.
+• asset-manifest.json — identities, dimensions and roles.
+
+The user will upload the actual recorded voice-over separately. That recording is approximately 25 seconds long. Measure the real file instead of assuming an exact duration. Listen to it and map its phrase boundaries before animating. The audio is the authority for the spoken words and timing; the reference transcript is a helper, not permission to replace the performance if they differ.
+
+Use the supplied performance. Preserve its words, order, pronunciation, pitch and natural pace. Do not regenerate it with TTS, add a second narrator, cut out meaning or stretch it to fill the film. Gentle cleanup and level control are allowed if they improve clarity without changing the character of the voice. Never synthesize a missing recording and pretend it was supplied. If the actual voice-over or an essential official logo is genuinely absent or unreadable, identify the exact missing file before final production. Do not ask again for creative choices already delegated to you.
+
+Use the current package and actual voice-over as the factual and identity inputs. No additional visual-reference upload is necessary. If the user also supplies a motion-reference video, study its movement, transformation logic, continuity and pacing only. Do not copy its layouts, text, colors or entire sequence. Downloaded filenames may be unrelated to the actual video content: inspect the video itself. Previously rejected outputs are negative references for their specific defects, not designs to imitate. Do not search for old campaign layouts or infer missing event details.
+
+3. NON-NEGOTIABLE FACTS AND PARTNER ROLES
+
+Initiative: «وقفتك بصحتك».
+Workplace/event collaboration: Breadfast.
+Medical backing: Powered by iVein — spoken as «بدعم من آيفين» where present in the supplied recording.
+Baheya contribution: breast-cancer awareness and the importance of early detection.
+Event date on screen: «الاثنين 19 أكتوبر».
+Closing invitation: «مستنيينكم».
+Core closing message: «صحتك ليها مكان.»
+
+The event topics are vascular health, varicose-vein symptoms and prevention, healthy habits during work, healthy nutrition during the day, breast-cancer awareness and early detection. Explain the collaboration through its purpose and the partner roles; do not present all four identities as an unexplained row of interchangeable sponsors.
+
+Introduce iVein clearly early in the film in connection with «بدعم من آيفين» and vascular health. It must not be missing until the final frame. Introduce Baheya meaningfully with its awareness contribution. Make the initiative and Breadfast relationship understandable. The final lockup should include all four original marks, with clear relationships, balanced optical weight and generous spacing. You choose the arrangement.
+
+Do not write «بكرة» or a relative date. Do not invent a venue, start time, booking link, public registration, price, free screening, diagnosis, medical guarantee or additional partner. No need to add hotline, website, hashtags or unsupported calls to action. Use the factual date and invitation given here.
+
+4. CREATIVE FREEDOM AND DESIGN EXPECTATION
+
+You may choose 2D, 2.5D, refined 3D, kinetic typography, illustrative motion, or a coherent hybrid. Pick the treatment that you can execute beautifully and consistently. Sophisticated 2D typography and one well-directed shape can meet this brief. Characters, photoreal imagery, complicated 3D and constant camera travel are not requirements. The number of scenes, camera behavior, visual metaphors, transitions, compositions and pacing are yours. There is no requirement for twelve frames or twelve scenes, and no requirement to illustrate each sentence literally.
+
+Build one memorable visual idea that connects the workday, personal health and the collaboration. Let the design system carry continuity through changes in subject. Think in evolving states and actions: what exists, what acts on it, what changes, what is revealed, and how that change leads us onward. The viewer should experience an idea developing. A recurring graphic element is welcome if it has a job and does not force every topic into the same treatment.
+
+Typography can be the main visual actor. A shape, light, mask or object can interact with a word to reveal, conceal or replace a meaningful phrase, open space or redirect attention. Respect Arabic shaping: mask or move complete shaped words/phrases rather than distorting joined letters. Avoid making the same word-by-word accumulation the film's main action.
+
+For example, the work-to-health shift could replace the relevant phrase through a motivated wipe while retaining a shared visual anchor, allowing space and color to change with the meaning. This is an interaction principle, not a required shot or layout. Invent a stronger solution if appropriate. A simple recurring form may also preserve continuity across changes in partner identity. Do not copy a reference video's exact dot, sun symbol or text sequence.
+
+Create real independent animation layers: separate text, forms, paths, objects, foreground and background where used. A generated completed poster with text and graphics baked into one bitmap is not an animation-ready scene. Do not substitute a sequence of flat AI images with zooms and pans. Tilting a whole leg illustration is not equivalent to animating flow within its vessels; a finished food photograph drifting sideways is not a developing action. An original typographic or graphic transformation can carry a topic just as effectively as literal illustration.
+
+Camera movement should reveal or follow something meaningful: push toward a detail, pull back to show a relationship, or track an action into another topic. Where depth exists, let foreground and background respond independently. Avoid random drift, repetitive zooming or orbiting a flat card. Let important text settle for reading.
+
+Connect passages through visual logic where useful: a shared contour, mask, path, typographic anchor or change of light/material can lead into a new composition. An intentional clean cut is valid too. Repeated side-to-side slides or crossfades between completed cards must not become the main motion language. Avoid generic icon cards, endlessly floating blobs, ornamental particles and unrelated tricks. Choose a small coherent vocabulary, not a quota of effects.
+
+Plan actions with preparation, development and settling. Controlled acceleration and deceleration matter. Some movement can be crisp while comprehension remains comfortable. Active music does not require fast cutting; continuous motion does not require constant new information.
+
+Make the event feel premium through precise hierarchy, strong spacing, controlled contrast, confident typography and disciplined rhythm. Avoid filling every empty area. Each moment should have one clear focal idea. A simple moment executed with craft is preferable to a crowded frame with several simultaneous messages. When human figures or medical forms are used, keep anatomy and behavior credible and their visual treatment consistent; avoid incidental generated text inside any imagery.
+
+Do not use an intricate puzzle or maze merely because the wider campaign once contained a game. This announcement does not require a game. Any original metaphor you select must support the message and remain understandable within the available reading time.
+
+5. COLOR AND OFFICIAL IDENTITY
+
+Use this event palette as a deliberate visual system:
+• Off-white: #FEFEFC
+• Deep navy: #102F68
+• Sky blue: #16AFE0
+• Pale blue: #ECF7FD
+• Pink accent: #E84291, particularly appropriate around Baheya awareness.
+• Selective teal: #009688.
+
+These tokens provide a common event canvas; they must not flatten the partners into one anonymous identity. Let the active partner visibly influence its passage:
+• WbS initiative moments: the supplied mark's teal/green and coral character.
+• iVein and vascular-health moments: the supplied iVein blue/cyan identity with compatible navy/light surfaces.
+• Baheya awareness moments: a recognizably Baheya environment drawing on the supplied teal/pink identity and purposeful pink emphasis.
+• Breadfast: retain its supplied magenta identity in the collaboration context.
+
+Change the surrounding world, never the original logo. Each passage should feel related to its partner through color, emphasis and graphic treatment, rather than only a tiny logo on an unchanged generic background. Keep shared typographic discipline and motion behavior to connect these passages into one film. Do not use every brand color in every frame. Make the handover intentional and resolve the identities into a balanced collaboration ending.
+
+Use calm readable areas, selective emphasis and stable color within each passage. Avoid oversaturation and muddy casts. The initiative's coral is welcome in its own context; do not impose blue on every partner or recolor their marks to achieve uniformity. The dark-to-light opening may use tonal variants appropriate to its identity.
+
+Use the supplied logos exactly. Preserve their original colors, Arabic/Latin lettering, relative proportions and included tagline. Do not redraw, trace with invented details, retype, recolor, crop away part of the mark, stretch, morph or decorate its internal lettering. Animate the complete logo as an intact asset if needed; a reveal must resolve into the unaltered mark. Do not use a generative image/video model to paint the logos into a scene.
+
+The WbS mark must retain both «وقفتك» and «بصحتك». The iVein logo must remain the supplied identity. Give each logo appropriate clear space and a contrasting surface. A discreet backing surface can improve contrast without changing the mark. Do not plaster every logo on every scene or add a permanent four-logo watermark.
+
+Some source logos are relatively small PNGs. Use them at modest, clear optical sizes that respect native detail. Prefer clean compositing over invented AI sharpening or aggressive enlargement. Do not conceal asset limitations with blur. If a particular shot would require an oversized logo, redesign that composition. Do not claim the PNGs are vectors.
+
+6. ARABIC COPY AND TYPOGRAPHY
+
+Primary language: natural Egyptian Arabic, with official Latin brand names and «Powered by iVein» where appropriate. The recorded voice carries the explanation; on-screen copy supports comprehension and recall. You are explicitly allowed to omit most spoken words from the screen. A recorded sentence does not create an obligation to display it. Use only the most useful short anchors; avoid full narration subtitles. Essential anchors remain the initiative, clear partner attribution, the date and the closing invitation/message.
+
+Approved supporting copy bank — select and group as needed rather than showing every phrase:
+• «وسط يوم الشغل…»
+• «وقت لصحتك»
+• «وقفتك بصحتك»
+• «Powered by iVein»
+• «صحة الأوعية الدموية»
+• «الدوالي: أعراضها والوقاية»
+• «عادات صحية أثناء الشغل»
+• «تغذية صحية خلال يومك»
+• «بالتعاون مع»
+• «التوعية بسرطان الثدي»
+• «أهمية الكشف المبكر»
+• «الاثنين 19 أكتوبر»
+• «وسط كل اللي مطلوب منك…»
+• «صحتك ليها مكان.»
+• «مستنيينكم»
+
+Healthy habits must clearly relate to posture, prolonged sitting/standing and movement during work. Nutrition should clearly read as healthy food choices through the day. Convey those distinctions through the combined narration and imagery; each topic does not need its own full written heading. For example, the VO can explain symptoms and prevention while a short «صحة الأوعية الدموية» anchor and relevant visual carry the screen. This is a copy-density example, not a fixed shot. Baheya's section must communicate breast-cancer awareness and early detection, not imply a treatment or a screening service the brief has not promised.
+
+Use a refined Arabic type family with reliable shaping and real weights; Alexandria or IBM Plex Sans Arabic are possible choices, not mandatory art direction. Set text in a real Arabic-capable rendering layer with correct RTL, joined forms, dots, punctuation and mixed Latin/Arabic ordering. Check the rendered output, not just the source strings. Do not use generative imagery for exact copy.
+
+Respect meaningful phrase boundaries and keep closely related words together. Do not isolate a second half of a short phrase on a new line for no reason. Animate complete words or shaped phrases, not isolated Arabic letters that detach or reverse order. Avoid fake bolding, heavy text shadows, tight leading and endless tracking. Use a clear scale hierarchy and enough weight for mobile reading.
+
+Read each finished composition at a simulated 360-pixel display width. Short lines need a useful stable hold after they finish arriving. Longer statements need more time. Do not consume the entire reading interval with letter-by-letter reveals, transitions or continuing motion. There should be a clean moment when the eye can settle.
+
+7. DURATION, NARRATION AND READING TIME
+
+Target finished duration: approximately 32–35 seconds. The narration is around 25 seconds; the film is not required to end with the last spoken word. Plan using the actual recording, then use music and visual breathing room to complete the experience.
+
+Allow the fully assembled closing composition approximately 6–8 seconds of stable visibility. It may finish assembling under the last spoken phrase and continue after narration. Balance the total duration and the real voice timing so this reading hold genuinely exists. If the actual recording makes these targets conflict, prioritize natural narration and a readable ending, making the smallest sensible duration adjustment and reporting it.
+
+This is not a mandatory shot schedule. Determine the scene count and transitions from the visual idea, real audio and comprehension needs. One evolving scene may span several spoken phrases. Do not split the film mechanically into one scene per sentence or one card per topic. Combine related ideas within a clear evolving visual when it improves the experience.
+
+Let an action begin, develop, resolve and register before demanding the next task. Give the viewer time to orient and notice what changed. Vary movement and stillness, detail and overview, tension and release. Avoid simultaneously introducing a major transition, a long unread line and a competing visual action. The additional seconds are for experiencing and understanding the film, not for adding more information or effects.
+
+If the film feels rushed, first reduce redundant shots, written information and simultaneous demands. Merely extending the duration or slowing every animation uniformly is insufficient. Preserve the 6–8-second readable closing target without automatically freezing the final layout for the last third of the film. Do not pad the ending with an empty logo freeze while the music dies away.
+
+The ending should resolve the film emotionally and functionally: the health message, the date, the invitation and the four partner identities must feel composed, not squeezed into leftover space. Maintain a subtle living atmosphere if useful, but avoid continual large movements that reset the reading task. End on a clean, intentional musical and visual resolution.
+
+8. MUSIC AND SOUND DESIGN — ESSENTIAL PART OF THE FILM
+
+Create a complete soundscape containing the supplied VO, an appropriate instrumental music bed and a small number of purposeful sound effects. Silent motion with narration is not the requested finish.
+
+Music direction: modern, warm, optimistic advertising energy with a defined groove, rhythmic movement and a confident build. Approximately 110–118 BPM is a useful starting search direction, not a mechanical acceptance criterion. Judge the actual pulse, arrangement, transients and feeling. It should energize a workplace collaboration announcement while leaving room for Arabic speech.
+
+Avoid sleepy ambient beds, meditation music, drifting pads without rhythm, slow sentimental piano, sad hospital music, long cinematic intros, intrusive vocals and aggressive EDM drops. The awareness section can become more sensitive through arrangement and space without becoming sorrowful or losing the underlying momentum.
+
+Coordinate the opening dark-to-light idea with a musical development or rhythmic reveal. Continue the score through the additional reading time after the VO, and edit to a proper ending. Do not abruptly cut a track at the narration length or let a long fade drain the final frame of energy. Choose usable, appropriately licensed music or an original composition; state the source and actual usage status in the handoff. Do not claim rights you have not established.
+
+Use restrained, designed effects at selected meaningful actions: perhaps a reveal, a transition with physical logic, a brief tactile detail or the closing resolution. These are possibilities, not a required effects checklist. Do not add a whoosh to every text entry or a click on every word. Avoid harsh transients and clutter around the narrator.
+
+Mix the voice clearly in front. Shape or duck the music around speech, especially partner names and the date. Listen to the exported file at ordinary phone volume, through headphones and in mono. Confirm consonants remain intelligible, the groove remains present, nothing clips and the final section has music. A visible audio track is not evidence of a good mix; listen to the actual encoded output.
+
+9. PRODUCTION AND TECHNICAL DELIVERY
+
+Canvas: vertical 9:16, 1080 × 1920 pixels. Choose 30 or 60 fps deliberately and keep it consistent. Deliver a high-quality SDR MP4 using H.264 video and AAC audio, with clean graphics, stable color and no unnecessary compression damage. Match the final export to the actual timeline. Include embedded final audio and make the file straightforward to play and upload.
+
+As conservative working bounds for important text and logos, begin with roughly 100 px on the left, 170 px on the right, 250 px at the top and 360 px at the bottom. These are design allowances for interface overlap, not a guarantee about every platform's current UI. Full-bleed artwork may extend beyond them. Check that the composition still feels balanced and that essential content is not pushed into an edge.
+
+Use a reliable rendering workflow available in your environment. A configured Remotion or HyperFrames project is suitable; choose the available route that produces the best result. Follow the actual installed toolchain and documented APIs. Do not build a fragile screenshot-based animation pipeline when a functioning video renderer is available. Do not report a render as complete if it failed or audio is missing.
+
+Keep text and logos in precise compositing layers, even if some visual elements are generated or rendered elsewhere. Resolve transparency, asset paths, font availability and aspect ratios before final export. Bundle dependencies and font/music attribution as appropriate so that the editable project can be reproduced. An attractive code preview, an HTML file or a storyboard alone is not the final video.
+
+10. QUALITY CONTROL AND HANDOFF
+
+Perform two complementary checks before delivery:
+• Visual inspection: examine rendered frames at useful intervals, approximately every half second, plus each critical transition and final assembled composition. Look for incorrect Arabic, missing words or dots, malformed logos, collisions, clipping, poor contrast, unexpected color shifts and inconsistent styles.
+• Full-speed playback: watch and listen to the complete encoded MP4. Assess opening impact, motion quality, actual reading time, narration synchronization, rhythm, music energy, intelligibility and ending resolution. A contact sheet cannot verify these qualities. Check whether the viewer experiences a developing action or chases new words. Temporarily hide supporting copy in representative working scenes: the visual action should still have a job; typographic scenes should be judged by the interaction and transformation of the type itself. This diagnostic does not require removing essential ending information. Check that partner passages actually change visual identity. If the result mainly consists of completed stills sliding, scaling or dissolving, rebuild those passages before declaring the film complete.
+
+Fix concrete defects you find and recheck the affected passages and final export. Do not substitute an endless review ritual for finishing. Confirm actual duration, resolution, frame rate and audio streams from the rendered file, and make claims only from those results.
+
+Supply:
+1) The final 1080 × 1920 MP4 with complete VO, music and effects.
+2) The editable project with the assets, dependency information and a reliable render command or equivalent instructions.
+3) One clean PNG of the finished closing composition.
+4) A short handoff noting duration, resolution, fps, audio presence, music source/usage status and any real remaining limitation.
+
+Do not publish or send the video to third parties. Do not invent a finished output when the environment cannot render it. If a genuine capability limit prevents delivery, explain the specific limit and provide the most complete honest project output you can.
+
+FINAL EXECUTION INSTRUCTION
+
+Use the provided identities, words and recording as the factual foundation. Make the original directing and design decisions yourself. Build an experience with evolving actions, meaningful typographic/graphic interactions, partner-specific identities and moments to breathe. Prioritize an engaging opening, a clear role for iVein, selective readable Arabic copy, music with advertising energy and a memorable complete ending. Judge motion by what happens within and between scenes, not by the number of transitions or camera moves. Proceed to create and render the film; do not return another storyboard approval request.

@@ -1,0 +1,21 @@
+{
+  "name": "wbs-open-direction-film",
+  "version": "1.0.0",
+  "private": true,
+  "description": "وقفتك بصحتك × Breadfast × بهية — Powered by iVein. Original 9:16 motion film (Remotion).",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render WbSFilm out/WbS-Event-Film_9x16.mp4",
+    "still": "remotion still WbSFilm out/closing.png --frame=960"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
