@@ -138,12 +138,15 @@ const Opening: React.FC<{t: number}> = ({t}) => {
           <SlotHeadline t={t} />
         </div>
         {L < 0.6 && (
-          <div style={{position: 'absolute', right: 30, top: 30, left: 30, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16, opacity: 1 - L / 0.6}}>
-            <div style={{width: '70%', height: 18, borderRadius: 9, background: 'rgba(255,255,255,0.13)'}} />
-            <div style={{width: '45%', height: 12, borderRadius: 9, background: 'rgba(255,255,255,0.13)'}} />
+          <div style={{position: 'absolute', inset: 0, opacity: 1 - L / 0.6}}>
+            <BlockView b={{lane: 1, x: 0, y: 0, w: LANE_W, h: HERO.h, fill: 'transparent', head: 0.62, accent: false, flag: '#F37B51',
+              rows: [{w: 0.8, done: false}, {w: 0.55, done: false}, {w: 0.7, done: false}]}} dy={0} />
           </div>
         )}
       </div>
+      {/* a calm band so the first line reads over the busy cards */}
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse 62% 7% at 50% 50%, rgba(8,26,61,0.92), rgba(8,26,61,0) 100%)',
+        opacity: prog(t, T.wasat - 0.1, T.wasat + 0.3) * (1 - prog(t, T.sehetak - 0.4, T.sehetak - 0.1))}} />
       <Txt y={960} size={84} color={C.offWhite} reveal={prog(t, T.wasat - 0.08, T.wasat + 0.5, eOut)}
         dy={(1 - prog(t, T.wasat - 0.08, T.wasat + 0.5, eOut)) * 18} op={1 - prog(t, T.sehetak - 0.3, T.sehetak - 0.08)}>
         وسط يوم الشغل…
@@ -395,6 +398,8 @@ export const Film: React.FC = () => {
               ))}
             </div>
           ))}
+          <AbsoluteFill style={{background: 'radial-gradient(ellipse 66% 7% at 50% 50%, rgba(8,26,61,0.92), rgba(8,26,61,0) 100%)',
+            transform: `translateY(${upperDy}px)`, opacity: prog(t, T.wasat2 + 0.2, T.wasat2 + 0.5) * (1 - prog(t, T.sehetak2 - 0.04, T.sehetak2 + 0.2))}} />
           <Txt y={960} size={70} color={C.offWhite} reveal={prog(t, T.wasat2 + 0.3, T.wasat2 + 0.8, eOut)}
             dy={upperDy - 1300 * (1 - enter(1))} op={1 - prog(t, T.sehetak2 - 0.04, T.sehetak2 + 0.2)}>
             وسط كل اللي مطلوب منك…

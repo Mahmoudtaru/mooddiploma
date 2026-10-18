@@ -1,7 +1,7 @@
 import React from 'react';
 import {rng} from './motion';
 
-// A "workday" block: a calendar/task slot with abstract content bars (no fake text).
+// A "workday" block: a to-do card — header line, then checkbox rows (no fake text).
 export type Block = {
   lane: number;
   x: number;
@@ -9,9 +9,10 @@ export type Block = {
   w: number;
   h: number;
   fill: string;
-  bars: number[]; // relative widths of content bars
+  head: number; // relative width of the header line
+  rows: {w: number; done: boolean}[]; // checklist rows
   accent: boolean; // thin sky marker on the reading edge
-  dot: boolean;
+  flag: string | null; // priority dot colour
 };
 
 export const LANE_W = 300;
@@ -36,9 +37,10 @@ export const makeLane = (
     w: LANE_W,
     h,
     fill: fills[Math.floor(r() * fills.length)],
-    bars: [0.55 + r() * 0.35, 0.3 + r() * 0.4, ...(h > 200 ? [0.25 + r() * 0.35] : [])],
+    head: 0.45 + r() * 0.3,
+    rows: Array.from({length: Math.max(1, Math.floor((h - 78) / 46))}, () => ({w: 0.4 + r() * 0.5, done: r() < 0.28})),
     accent: r() < 0.35,
-    dot: r() < 0.3,
+    flag: r() < 0.45 ? (r() < 0.5 ? '#F37B51' : '#16AFE0') : null,
   });
   if (!insert) {
     let y = from;
@@ -73,7 +75,8 @@ export const BlockView: React.FC<{
   barColor?: string;
   accentColor?: string;
   opacity?: number;
-}> = ({b, dy, barColor = 'rgba(255,255,255,0.13)', accentColor = 'rgba(22,175,224,0.75)', opacity = 1}) => {
+}> = ({b, dy, barColor = 'rgba(255,255,255,0.2)', accentColor = 'rgba(22,175,224,0.85)', opacity = 1}) => {
+  const boxColor = 'rgba(255,255,255,0.32)';
   const top = b.y + dy;
   if (top > 2000 || top + b.h < -80) return null;
   return (
@@ -93,14 +96,24 @@ export const BlockView: React.FC<{
       {b.accent && (
         <div style={{position: 'absolute', right: 0, top: 0, bottom: 0, width: 7, background: accentColor}} />
       )}
-      <div style={{position: 'absolute', right: 30, top: 30, left: 30, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16}}>
-        {b.bars.map((w, i) => (
-          <div key={i} style={{width: `${w * 100}%`, height: i === 0 ? 18 : 12, borderRadius: 9, background: barColor}} />
-        ))}
+      {/* header: title line + priority dot */}
+      <div style={{position: 'absolute', right: 30, top: 28, left: 30, height: 20, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', gap: 14}}>
+        <div style={{width: `${b.head * 100}%`, height: 18, borderRadius: 9, background: barColor}} />
+        {b.flag && <div style={{width: 16, height: 16, borderRadius: 8, background: b.flag, opacity: 0.9}} />}
       </div>
-      {b.dot && (
-        <div style={{position: 'absolute', left: 30, bottom: 26, width: 30, height: 30, borderRadius: 15, background: barColor}} />
-      )}
+      {/* checklist rows */}
+      {b.rows.map((row, i) => (
+        <div key={i} style={{position: 'absolute', right: 30, left: 30, top: 74 + i * 46, height: 26, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', gap: 16}}>
+          <div style={{width: 26, height: 26, flex: '0 0 26px', borderRadius: 8, boxSizing: 'border-box',
+            border: row.done ? 'none' : `3px solid ${boxColor}`, background: row.done ? accentColor : 'transparent',
+            display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            {row.done && (
+              <svg width={16} height={16} viewBox="0 0 16 16"><path d="M3 8.5 L6.5 12 L13 4.5" fill="none" stroke="#FFFFFF" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" /></svg>
+            )}
+          </div>
+          <div style={{width: `${row.w * 100}%`, height: 12, borderRadius: 6, background: barColor, opacity: row.done ? 0.55 : 1}} />
+        </div>
+      ))}
     </div>
   );
 };
