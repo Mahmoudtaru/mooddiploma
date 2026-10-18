@@ -8,10 +8,7 @@ import {A} from './timeline';
 
 /*
  * One continuous camera. The film is a single tall world: eight "stations" stacked vertically
- * (one screen each), joined by one sky-blue health thread. The thread draws ahead of the camera
- * and becomes each topic's visual: the work-day loop, the underline of the date, the leg's vein,
- * the floor under the figure, the ring around the plate, Baheya's ribbon, the line under the quiet
- * setup and finally the banner line of the closing card.
+ * (one screen each); the camera travels down from one to the next in the natural pauses of the voice.
  */
 
 const H = 1920;
@@ -47,54 +44,6 @@ const camera = (t: number) => {
 	y += k === 6 ? 0 : k === 5 ? -Math.abs(w) : k === 7 ? Math.abs(w) : w;
 	return {y, scale: 1 - 0.085 * dip, moving};
 };
-
-/* ───────────────────────── The thread (world coordinates) ───────────────────────── */
-
-const THREAD: {d: string; s: number; dur: number; stroke?: string}[] = [
-	// station 0: out of the laptop, a loop that makes room for the heart
-	{d: 'M255 1060 C223 970 245 890 310 840 A95 95 0 1 1 500 840 A95 95 0 1 1 310 840', s: 1.78, dur: 0.75},
-	// down the left margin into station 1
-	{d: 'M310 840 C200 900 60 980 60 1300 C60 1700 300 1900 560 2010 C800 2060 980 2200 980 2500 L980 3220', s: 2.75, dur: 1.6},
-	// station 1: underline beneath the date
-	{d: 'M980 3220 C980 3380 880 3450 760 3450 L250 3450', s: 7.15, dur: 1.3},
-	// down into station 2, ending in the leg's vein (which continues the line upward)
-	{d: 'M250 3450 C120 3450 60 3540 60 3700 L60 5200 C60 5330 160 5390 262 5390 C322 5390 338 5350 335 5302', s: 8.72, dur: 0.95},
-	// station 2: from the top of the vein (toward the heart) out to the right, then down
-	{d: 'M346 4612 C346 4560 420 4540 600 4540 C860 4540 980 4600 980 4800', s: 10.5, dur: 0.7},
-	{d: 'M980 4800 L980 6900 C980 7120 940 7212 884 7212', s: 11.9, dur: 0.95},
-	// station 3: becomes the floor under the figure
-	{d: 'M884 7212 L86 7212', s: 12.55, dur: 0.6},
-	{d: 'M86 7212 C40 7212 40 7300 40 7400 L40 8500 C40 8820 200 9020 465 9020', s: 13.85, dur: 0.85},
-	// station 4: a ring around the plate
-	{d: 'M465 9020 A300 300 0 1 1 465 8420 A300 300 0 1 1 465 9020', s: 14.3, dur: 0.6},
-	{d: 'M465 9020 C640 9020 720 9140 860 9140 C960 9140 980 9200 980 9400 L980 10600', s: 15.35, dur: 0.85, stroke: 'url(#toPink)'},
-	// station 5: sweeps into the ribbon's first tail, leaves from the second
-	{d: 'M980 10600 C980 10720 900 10765 780 10765 L470 10765 C420 10765 395 10745 385 10720', s: 16.55, dur: 0.5, stroke: C.pink},
-	{d: 'M625 10720 C660 10765 720 10790 800 10790 C940 10790 980 10850 980 11000 L980 11700', s: 18.05, dur: 0.6, stroke: 'url(#toSky)'},
-	// station 6 (navy): down and under the quiet line
-	{d: 'M980 11700 L980 12520 C980 12600 950 12640 910 12650', s: 20.1, dur: 0.85},
-	{d: 'M910 12650 C760 12730 620 12610 505 12680 C390 12750 260 12650 100 12710', s: 20.95, dur: 1.3},
-	// into the closing card, where it settles as the banner's flowing line
-	{d: 'M100 12710 C60 12730 40 12800 40 12900 L40 14900 C40 15100 200 15200 400 15250 C650 15310 900 15300 1120 15190', s: 22.3, dur: 1.4},
-];
-
-const Thread: React.FC<{t: number}> = ({t}) => (
-	<svg width={1080} height={Y(8)} style={{position: 'absolute', left: 0, top: 0, overflow: 'visible'}}>
-		<defs>
-			<linearGradient id="toPink" gradientUnits="userSpaceOnUse" x1="0" y1="9300" x2="0" y2="10300">
-				<stop offset="0" stopColor={C.sky} />
-				<stop offset="1" stopColor={C.pink} />
-			</linearGradient>
-			<linearGradient id="toSky" gradientUnits="userSpaceOnUse" x1="0" y1="10800" x2="0" y2="11550">
-				<stop offset="0" stopColor={C.pink} />
-				<stop offset="1" stopColor={C.sky} />
-			</linearGradient>
-		</defs>
-		{THREAD.map((sg, i) => (
-			<Drawn key={i} d={sg.d} p={prog(t, sg.s, sg.dur, easeInOut)} stroke={sg.stroke ?? C.sky} width={7} />
-		))}
-	</svg>
-);
 
 /* ───────────────────────── World surfaces: pink wash, navy band, parallax depth ───────────────────────── */
 
@@ -423,7 +372,6 @@ const Frame: React.FC = () => {
 			>
 				<Parallax camY={cam.y} />
 				<Surfaces />
-				<Thread t={t} />
 				<Station k={0} camY={cam.y}><Hook t={t} /></Station>
 				<Station k={1} camY={cam.y}><Collab t={t} /></Station>
 				<Station k={2} camY={cam.y}><Vascular t={t} /></Station>

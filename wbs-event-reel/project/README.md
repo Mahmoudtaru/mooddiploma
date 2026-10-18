@@ -20,7 +20,7 @@ With no internet for the Chrome download, point Remotion at a local Chromium:
 
 ## Structure
 - `src/timeline.json`: the single source of timing: the measured speech map, brand-word anchors, scene windows and SFX cues. Both the composition and the audio mix read it.
-- `src/Reel.tsx`: one continuous camera over a tall world of 8 stations (hook, collaboration and date, vascular with Powered by iVein, work habits, nutrition, Baheya, navy pause, closing). A single health thread draws ahead of the camera and becomes each topic's visual (heart loop, date underline, vein, floor, plate ring, ribbon, closing line). Camera moves (`PANS`) sit in real pauses of the voice. Motion blur (10 samples, 180° shutter) is used only while the camera travels.
+- `src/Reel.tsx`: one continuous camera over a tall world of 8 stations (hook, collaboration and date, vascular with Powered by iVein, work habits, nutrition, Baheya, navy pause, closing). Camera moves (`PANS`) sit in real pauses of the voice. Motion blur (10 samples, 180° shutter) is used only while the camera travels.
 - `src/art.tsx`: background, logos, the articulated figure, leg/venous flow, plate, ribbon (all original vector drawing).
 - `src/motion.tsx`: easing vocabulary, word-by-word kinetic headlines (whole Arabic words, shaping intact), RTL mask reveal.
 - `public/logos/`: the supplied logo PNGs, unmodified. `public/fonts/`: Alexandria + IBM Plex Sans Arabic (SIL OFL 1.1, licences included).

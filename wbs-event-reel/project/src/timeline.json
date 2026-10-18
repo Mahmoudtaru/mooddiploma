@@ -113,10 +113,10 @@
   },
   "sfx": [
     {
-      "at": 1.8,
+      "at": 2.2,
       "kind": "draw",
       "gain_db": -29,
-      "why": "health path starts drawing out of the work day"
+      "why": "a space opens for the heart in the working day"
     },
     {
       "at": 6.28,
