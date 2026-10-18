@@ -139,7 +139,8 @@ const Opening: React.FC<{t: number}> = ({t}) => {
         </div>
         {L < 0.6 && (
           <div style={{position: 'absolute', inset: 0, opacity: 1 - L / 0.6}}>
-            <BlockView b={{lane: 1, x: 0, y: 0, w: LANE_W, h: HERO.h, fill: 'transparent', head: 0.62, accent: false, flag: '#F37B51',
+            <BlockView b={{lane: 1, x: 0, y: 0, w: LANE_W, h: HERO.h, fill: 'transparent', accent: false, list: 'checks',
+              task: {title: 'تقرير الشهر', tag: 'عاجل', kind: 'urgent'},
               rows: [{w: 0.8, done: false}, {w: 0.55, done: false}, {w: 0.7, done: false}]}} dy={0} />
           </div>
         )}

@@ -11,7 +11,7 @@ open-direction brief, the four official logos and the supplied voice-over record
 | this folder | Editable Remotion project with assets, fonts, timing, score and mix scripts |
 
 ## Concept: "the slot" (مكان في يومك)
-The workday is a dense dark column of to-do cards (header line, checkbox rows, a few ticked, priority dots) advancing in mechanical half-beat steps. The stream
+The workday is a dense dark column of task cards advancing in mechanical half-beat steps. Each card has a short generic task title (اجتماع، تقرير الشهر، الإيميلات…), a time, «عاجل» or unread-count tag, and bullet or checklist rows. Only workday hours are used, never dates, so nothing competes with the event date. The stream
 brakes (the *وقفة*), one block lights from within and its widening edge washes «وسط يوم الشغل…» into «وقت لصحتك».
 That lit slot carries the whole film:
 
