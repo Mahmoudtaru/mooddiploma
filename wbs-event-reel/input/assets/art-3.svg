@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="620" height="620" viewBox="0 0 620 620"><circle cx="310" cy="310" r="260" fill="#EAF6FC"/>
+    <path d="M105 508H550" stroke="#BDDFF1" stroke-width="5" stroke-linecap="round"/>
+    <path d="M365 282H535M500 285V507" fill="none" stroke="#102F68" stroke-width="7" stroke-linecap="round"/>
+    <path d="M377 278H458L480 220H398Z" fill="#D5ECF8" stroke="#102F68" stroke-width="5"/>
+    <path d="M167 250V401H328M184 404V503M307 404V503" fill="none" stroke="#102F68" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="277" cy="159" r="45" fill="#C0E6F5" stroke="#102F68" stroke-width="6"/>
+    <path d="M272 213L258 333L352 343L377 494M260 332L211 376" fill="none" stroke="#102F68" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M273 226L319 278L393 278" fill="none" stroke="#16AFE0" stroke-width="19" stroke-linecap="round"/>
+    <path d="M146 171C105 231 105 281 131 320M117 305L134 325L145 300" fill="none" stroke="#16AFE0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="488" cy="132" r="42" fill="#DDF4EC"/>
+    <g transform="translate(464,108) scale(2.0)" fill="none" stroke="#009688" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"> <path d="M13 5H19V11" /> <path d="M19 5L5 19" /> </g></svg>

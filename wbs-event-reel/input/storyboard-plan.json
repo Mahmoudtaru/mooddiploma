@@ -1,0 +1,180 @@
+{
+  "title": "وقفتك بصحتك × Breadfast — إعلان التعاون",
+  "version": 2,
+  "stage": "Storyboard review",
+  "duration": 30,
+  "aspect": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "publication_date": "2026-10-18",
+  "event_date": "2026-10-19",
+  "voice": "Egyptian Arabic voice-over proposed; not generated. See voiceover.txt and voice-style.txt. Scene timing to conform to actual audio.",
+  "music": "Warm contemporary instrumental, light pulse, approximately 100 BPM; track not selected or licensed yet.",
+  "safe_area": {
+    "essential_content": {
+      "left": 100,
+      "right": 170,
+      "top": 260,
+      "bottom": 390
+    },
+    "note": "Conservative working margins, not a platform guarantee; native posting preview to be checked at delivery."
+  },
+  "logo_policy": "No persistent corner logos. WbS, Breadfast and Powered by iVein in frame 3; iVein introducing vascular health in frame 5; Baheya in frame 9; all four with relationships in frame 12.",
+  "rhythm": "Hook → collaboration reveal → date → four topics → quiet setup → closing hold",
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0,
+      "end": 2,
+      "copy": [
+        "وسط يوم",
+        "الشغل…"
+      ],
+      "motion": "النص يدخل من اليمين، والخط يبدأ حركته من مشهد المكتب.",
+      "logos": []
+    },
+    {
+      "id": "health-time",
+      "start": 2,
+      "end": 4,
+      "copy": [
+        "وقت",
+        "لصحتك."
+      ],
+      "motion": "الخط يكمل مساره، ويتحول التركيز من الشغل لرمز الصحة.",
+      "logos": []
+    },
+    {
+      "id": "collaboration",
+      "start": 4,
+      "end": 7,
+      "copy": [
+        "يوم للتوعية بالصحة",
+        "في",
+        "Powered by"
+      ],
+      "motion": "تقديم المبادرة ثم Breadfast؛ ظهور iVein مع عبارة الفويس «بدعم من آيفين». التوقيت التفصيلي يتحدد بعد توليد الصوت.",
+      "logos": [
+        "wbs",
+        "breadfast",
+        "ivein"
+      ]
+    },
+    {
+      "id": "event-date",
+      "start": 7,
+      "end": 9,
+      "copy": [
+        "الاثنين",
+        "19",
+        "أكتوبر"
+      ],
+      "motion": "تثبيت التاريخ بحركة رقم واحدة، من غير عد تصاعدي.",
+      "logos": []
+    },
+    {
+      "id": "vascular",
+      "start": 9,
+      "end": 11.5,
+      "copy": [
+        "مع",
+        "صحة الأوعية",
+        "الدموية"
+      ],
+      "motion": "تقديم iVein أولاً مع الفويس «مع آيفين»، ثم عنوان الأوعية ورسم مسار الوريد بنقاط صاعدة باتجاه القلب.",
+      "logos": [
+        "ivein"
+      ]
+    },
+    {
+      "id": "varicose",
+      "start": 11.5,
+      "end": 13.5,
+      "copy": [
+        "الدوالي",
+        "أعراضها والوقاية"
+      ],
+      "motion": "تكملة نفس مشهد الأوعية مع تقريب على مسار الوريد، وتحويل الخلفية للكحلي.",
+      "logos": []
+    },
+    {
+      "id": "ergonomics",
+      "start": 13.5,
+      "end": 16,
+      "copy": [
+        "عادات صحية",
+        "أثناء الشغل"
+      ],
+      "motion": "العنوان أولاً، ثم أثناء الشغل بعد 0.25 ثانية، ثم الرسم بعد 0.4 ثانية. يتناول المحور الوقفة والقعدة والحركة؛ الرسم يوضح وضعية العمل.",
+      "logos": []
+    },
+    {
+      "id": "nutrition",
+      "start": 16,
+      "end": 18.5,
+      "copy": [
+        "تغذية صحية",
+        "خلال يومك"
+      ],
+      "motion": "العنوان أولاً، ثم خلال يومك بعد 0.25 ثانية، ثم تتجمع مكونات الطبق خلال 0.5 ثانية وتثبت.",
+      "logos": []
+    },
+    {
+      "id": "baheya-partner",
+      "start": 18.5,
+      "end": 21,
+      "copy": [
+        "وبالتعاون مع"
+      ],
+      "motion": "انتقال وردي هادئ يقدّم بهية؛ الشعار الأصلي ثابت وواضح.",
+      "logos": [
+        "baheya"
+      ]
+    },
+    {
+      "id": "breast-awareness",
+      "start": 21,
+      "end": 24,
+      "copy": [
+        "التوعية",
+        "بسرطان الثدي",
+        "وأهمية الكشف المبكر"
+      ],
+      "motion": "استمرار الشريط الوردي من المشهد السابق، مع ظهور الرسالة على مرحلتين.",
+      "logos": []
+    },
+    {
+      "id": "closing-setup",
+      "start": 24,
+      "end": 26,
+      "copy": [
+        "وسط كل اللي",
+        "مطلوب منك…"
+      ],
+      "motion": "وقفة بصرية هادية، والنص يدخل في سطرين.",
+      "logos": []
+    },
+    {
+      "id": "closing",
+      "start": 26,
+      "end": 30,
+      "copy": [
+        "صحتك",
+        "ليها مكان.",
+        "مستنيينكم",
+        "الاثنين 19 أكتوبر",
+        "بالتعاون مع",
+        "Powered by"
+      ],
+      "motion": "تكملة الجملة على ضربة موسيقية خفيفة؛ تجمّع الشركاء وثبات حتى النهاية.",
+      "logos": [
+        "wbs",
+        "breadfast",
+        "baheya",
+        "ivein"
+      ]
+    }
+  ],
+  "voiceover_proposal": "وسط يوم الشغل… خُد وقت لصحتك.\n\nمبادرة «وقفتك بصحتك» في Breadfast، بدعم من آيفين، الاتنين تسعتاشر أكتوبر.\n\nنفهم أعراض الدوالي وطرق الوقاية، نراجع عاداتنا أثناء الشغل، نختار أكل يناسب يومنا.\n\nمع بهية، هنتكلم عن سرطان الثدي وأهمية الكشف المبكر.\n\nوسط كل اللي مطلوب منك… صحتك ليها مكان.\nمستنيينكم.\n",
+  "voice_style": "Natural conversational Egyptian Arabic with a Cairo accent. Warm, clear and confidently welcoming, like inviting colleagues to a workplace health event. Use a comfortable medium pace and connected thought groups, with brief natural pauses.\n\nLift gently on “خُد وقت لصحتك”. Pronounce “بدعم من آيفين” clearly as part of the event introduction, giving the brand name a small confident emphasis. Keep the health topics flowing as one coherent invitation. Deliver the Baheya and early-detection line with reassuring, matter-of-fact clarity. Land “صحتك ليها مكان” calmly, then finish “مستنيينكم” with a subtle vocal smile.\n\nTarget approximately 30 seconds while preserving natural phrasing. Read only the supplied transcript. Pronounce Breadfast naturally in English and آيفين as “eye-vein”. Exact timing will be measured after generation.\n"
+}

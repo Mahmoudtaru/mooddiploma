@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="620" height="620" viewBox="0 0 620 620"><circle cx="310" cy="310" r="260" fill="#EEF8F3"/>
+    <ellipse cx="311" cy="467" rx="210" ry="26" fill="#102F68" opacity=".045"/>
+    <circle cx="310" cy="309" r="203" fill="white" stroke="#B7DDCE" stroke-width="4"/>
+    <circle cx="310" cy="309" r="170" fill="#F6FAF7" stroke="#CDE4DA" stroke-width="3"/>
+    <path d="M310 309L310 142A167 167 0 0 1 477 309Z" fill="#F7DFB6"/>
+    <path d="M310 309L477 309A167 167 0 0 1 310 476Z" fill="#FFE8E0"/>
+    <path d="M310 309L310 476A167 167 0 1 1 310 142Z" fill="#DAEDDA"/>
+    <path d="M198 271C174 215 215 189 250 226C291 218 300 271 262 290C244 339 195 319 198 271Z" fill="#75B78B"/>
+    <path d="M226 315L251 254M215 281L244 273" fill="none" stroke="#E2F3E3" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="241" cy="371" r="30" fill="#EC956C"/>
+    <circle cx="270" cy="348" r="24" fill="#EBAF81"/>
+    <path d="M350 225L405 250M362 209L417 234M350 253L405 279" stroke="#D7BB81" stroke-width="8" stroke-linecap="round"/>
+    <path d="M350 365C369 330 412 328 425 369C424 411 381 429 350 401Z" fill="#DCA48D"/>
+    <path d="M78 182V427M61 185V237Q78 257 95 237V185M539 181V424M539 181C577 230 577 270 539 283" fill="none" stroke="#102F68" stroke-width="6" stroke-linecap="round"/></svg>

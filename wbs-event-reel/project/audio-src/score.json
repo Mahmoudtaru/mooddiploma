@@ -1,0 +1,19 @@
+{
+ "dur": 25.0, "bpm": 100, "grid_offset": 1.1,
+ "sections": [
+  {"start": 0.0,   "end": 3.27,  "chord": "Dadd9", "amp": 0.6,  "bright": 0.45, "arp": 0.5, "drive": 1},
+  {"start": 3.27,  "end": 7.0,   "chord": "Gmaj7", "amp": 0.75, "bright": 0.55, "arp": 1,   "drive": 1},
+  {"start": 7.0,   "end": 9.18,  "chord": "A",     "amp": 0.75, "bright": 0.55, "arp": 1,   "drive": 1},
+  {"start": 9.18,  "end": 12.18, "chord": "Bm",    "amp": 0.7,  "bright": 0.5,  "arp": 1,   "drive": 1},
+  {"start": 12.18, "end": 14.03, "chord": "G",     "amp": 0.72, "bright": 0.55, "arp": 1,   "drive": 1},
+  {"start": 14.03, "end": 15.7,  "chord": "A",     "amp": 0.72, "bright": 0.55, "arp": 1,   "drive": 1},
+  {"start": 15.7,  "end": 18.1,  "chord": "Gmaj7", "amp": 0.6,  "bright": 0.45, "arp": 0.5, "drive": 0},
+  {"start": 18.1,  "end": 20.44, "chord": "Em7",   "amp": 0.58, "bright": 0.42, "arp": 0.5, "drive": 0},
+  {"start": 20.44, "end": 22.65, "chord": "Asus4", "amp": 0.55, "bright": 0.4,  "arp": 0,   "drive": 0}
+ ],
+ "end_chord": {"chord": "Dadd9", "start": 22.65},
+ "moments": [
+  {"type": "riser", "start": 21.3, "end": 22.65, "amp": 0.03},
+  {"type": "bells", "at": 22.7, "notes": [74, 78, 81, 86], "step": 0.2, "amp": 0.035}
+ ]
+}

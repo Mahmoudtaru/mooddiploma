@@ -1,0 +1,24 @@
+{
+  "name": "wbs-breadfast-event-reel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "وقفتك بصحتك × Breadfast — Remotion collaboration reel",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render WbSReel out/WbS-Breadfast-Reel_9x16_60fps.mp4",
+    "still": "remotion still WbSReel out/closing.png --frame=1499"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "@remotion/fonts": "4.0.536",
+    "@remotion/paths": "4.0.536",
+    "@remotion/shapes": "4.0.536",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}

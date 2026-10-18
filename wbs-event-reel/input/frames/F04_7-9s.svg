@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="#FEFEFC"/>
+    <path d="M0 0H780C570 180 240 100 0 310Z" fill="#EDF8FD"/>
+    <path d="M0 0H510C370 123 170 90 0 211Z" fill="#DCF2FC" opacity=".55"/>
+    <path d="M0 270C260 56 490 197 700 0" fill="none" stroke="#9ED6EB" stroke-width="2"/>
+    <path d="M0 196C180 25 370 176 590 0" fill="none" stroke="#102F68" stroke-opacity=".4" stroke-width="1.5"/>
+    <path d="M260 1920C560 1620 790 1805 1080 1530V1920Z" fill="#EDF8FD"/>
+    <path d="M460 1920C720 1690 890 1840 1080 1700V1920Z" fill="#DCF2FC" opacity=".65"/>
+    <path d="M290 1920C590 1620 830 1840 1080 1610" fill="none" stroke="#9ED6EB" stroke-width="2"/><text x="540" y="570" text-anchor="middle" direction="rtl" unicode-bidi="embed" font-family="Alexandria Arabic WBS, DejaVu Sans" font-size="115" font-weight="800" fill="#102F68">الاثنين</text><circle cx="540" cy="1030" r="275" fill="#E6F5FC"/><text x="540" y="1140" text-anchor="middle" font-family="DejaVu Sans" font-size="330" font-weight="800" fill="#16AFE0">19</text><text x="540" y="1440" text-anchor="middle" direction="rtl" unicode-bidi="embed" font-family="Alexandria Arabic WBS, DejaVu Sans" font-size="117" font-weight="800" fill="#102F68">أكتوبر</text></svg>
