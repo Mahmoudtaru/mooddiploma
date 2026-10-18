@@ -1,10 +1,10 @@
 # وقفتك بصحتك × Breadfast — collaboration reel (Remotion)
 
-Vertical 1080×1920, 60 fps, 25.000 s (1500 frames) = the measured length of the supplied voice-over.
+Vertical 1080×1920, 60 fps, 27.000 s (1620 frames): the supplied 25.000 s voice-over plus a 2 s hold on the completed closing card (the music resolves over it).
 
 ## Deliverables
 - `out/WbS-Breadfast-Reel_9x16_60fps.mp4`: H.264 High, yuv420p, BT.709 SDR, AAC 48 kHz stereo 320 kb/s, faststart.
-- `out/closing-composition.png`: the finished closing frame (frame 1499).
+- `out/closing-composition.png`: the finished closing frame (frame 1619).
 - `qa/`: contact sheets every 0.5 s (`final_sheetA/B.png`) and a 360 px phone-width check (`phone360.png`).
 
 ## Render
@@ -13,18 +13,18 @@ npm install
 python3 audio-src/build_audio.py        # rebuilds public/audio/mix.wav (voice + music + SFX), -16 LUFS
 npx remotion studio                      # edit / preview
 npx remotion render WbSReel out/WbS-Breadfast-Reel_9x16_60fps.mp4
-npx remotion still  WbSReel out/closing-composition.png --frame=1499
+npx remotion still  WbSReel out/closing-composition.png --frame=1619
 ```
 With no internet for the Chrome download, point Remotion at a local Chromium:
 `REMOTION_BROWSER=/path/to/chrome-headless-shell npx remotion render …` (see `remotion.config.ts`).
 
 ## Structure
 - `src/timeline.json`: the single source of timing: the measured speech map, brand-word anchors, scene windows and SFX cues. Both the composition and the audio mix read it.
-- `src/Reel.tsx`: the 8 scenes (hook, collaboration and date, vascular with Powered by iVein, work habits, nutrition, Baheya, navy pause, closing).
+- `src/Reel.tsx`: one continuous camera over a tall world of 8 stations (hook, collaboration and date, vascular with Powered by iVein, work habits, nutrition, Baheya, navy pause, closing). A single health thread draws ahead of the camera and becomes each topic's visual (heart loop, date underline, vein, floor, plate ring, ribbon, closing line). Camera moves (`PANS`) sit in real pauses of the voice. Motion blur (10 samples, 180° shutter) is used only while the camera travels.
 - `src/art.tsx`: background, logos, the articulated figure, leg/venous flow, plate, ribbon (all original vector drawing).
-- `src/motion.tsx`: easing vocabulary, RTL mask reveal (whole shaped lines, never split letters), scene lift transition.
+- `src/motion.tsx`: easing vocabulary, word-by-word kinetic headlines (whole Arabic words, shaping intact), RTL mask reveal.
 - `public/logos/`: the supplied logo PNGs, unmodified. `public/fonts/`: Alexandria + IBM Plex Sans Arabic (SIL OFL 1.1, licences included).
-- `audio-src/`: `score.json` + `score.py` (original music bed, synthesised from code), `build_audio.py` (original SFX synthesis, ducking, loudness), `vo_timing_raw.json`.
+- `audio-src/`: `score.json` + `score.py` (original music bed, synthesised from code; edit `score.json`, then `python3 audio-src/score.py audio-src/score.json audio-src/music_bed.wav`), `build_audio.py` (original SFX synthesis, ducking, loudness). Music sits about 6 LU under the voice in pauses and about 11 LU under it while words are spoken, `vo_timing_raw.json`.
 
 ## Audio provenance
 - Voice: the supplied recording `voiceover.wav`, kept intact (only resampled 24→48 kHz with a 60 Hz high-pass; no edits, time-stretch or pitch change).

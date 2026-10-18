@@ -11,7 +11,6 @@
   "dependencies": {
     "@remotion/cli": "4.0.536",
     "@remotion/fonts": "4.0.536",
-    "@remotion/motion-blur": "4.0.536",
     "@remotion/paths": "4.0.536",
     "@remotion/shapes": "4.0.536",
     "react": "19.1.0",

@@ -80,34 +80,34 @@
   "scenes": {
     "hook": [
       0,
-      3.45
+      2.95
     ],
     "collab": [
-      3.1,
-      9.35
+      2.95,
+      8.82
     ],
     "vascular": [
-      9.0,
-      12.3
+      8.82,
+      11.95
     ],
     "habits": [
       11.95,
-      14.15
+      13.92
     ],
     "nutrition": [
-      13.85,
-      15.85
+      13.92,
+      15.45
     ],
     "baheya": [
-      15.55,
-      20.5
+      15.45,
+      20.16
     ],
     "pause": [
-      20.45,
-      22.55
+      20.16,
+      22.45
     ],
     "close": [
-      22.55,
+      22.45,
       27.0
     ]
   },
@@ -125,46 +125,47 @@
       "why": "Powered by iVein settles: collaboration arrangement complete"
     },
     {
-      "at": 9.62,
+      "at": 9.65,
       "kind": "sweep",
       "gain_db": -31,
       "why": "venous flow line reveals upward"
     },
     {
-      "at": 12.72,
+      "at": 12.8,
       "kind": "move",
       "gain_db": -29,
       "why": "posture straightens"
     },
     {
-      "at": 13.25,
+      "at": 13.3,
       "kind": "move",
       "gain_db": -31,
       "why": "figure stands and stretches"
     },
     {
-      "at": 14.62,
+      "at": 14.78,
       "kind": "place",
       "gain_db": -28,
       "why": "plate ingredients settle"
     },
     {
-      "at": 15.8,
+      "at": 15.6,
       "kind": "air",
       "gain_db": -30,
       "why": "pink partner transition into Baheya"
     },
     {
-      "at": 20.42,
+      "at": 20.2,
       "kind": "swell",
       "gain_db": -32,
       "why": "navy surface rises for the quiet setup"
     },
     {
-      "at": 22.62,
+      "at": 22.78,
       "kind": "accent",
       "gain_db": -28,
       "why": "light returns: health has a place"
     }
-  ]
+  ],
+  "_scenes_note": "scenes = camera stations; each boundary is the start of the camera move to that station (see PANS in src/Reel.tsx)"
 }
