@@ -69,6 +69,12 @@ def sfx(cues, T, sr=48000):
             for k_, (fr, dt) in enumerate([(1320, 0), (1760, .09)]):
                 n = int(.35 * sr); tt = np.arange(n) / sr
                 add(np.sin(2 * np.pi * fr * tt) * env(n, r=.7), t + dt, .1)
+        elif kind == 'thud':
+            n = int(.45 * sr); tt = np.arange(n) / sr
+            f = 40 + 70 * np.exp(-tt * 18)
+            add(np.sin(2 * np.pi * np.cumsum(f) / sr) * env(n, a=.002, r=.9), t, .5)
+            m = int(.2 * sr)
+            add(rng.standard_normal(m) * env(m, a=.001, r=2) * .5, t, .12)
         elif kind == 'crack':
             n = int(.25 * sr)
             sig = rng.standard_normal(n) * env(n, a=.001, r=1.4)
