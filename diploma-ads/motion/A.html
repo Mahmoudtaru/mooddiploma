@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>A — الحاجز</title>
+<link rel="stylesheet" href="engine.css">
+<style>
+.who{width:320px;height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.who .av{width:150px;height:150px;border-radius:50%;background:#EDE9DF;display:flex;align-items:center;justify-content:center}
+.who .av svg{width:84px;height:84px;stroke:var(--pnavy);fill:none;stroke-width:1.8}
+.who .nm{font:800 46px Cairo}
+.ai .av{background:rgba(146,180,59,.18)}.ai .av svg{stroke:var(--dgreen);fill:rgba(146,180,59,.25)}
+.glass{width:150px;height:560px;border-radius:26px;background:linear-gradient(160deg,rgba(255,255,255,.26),rgba(255,255,255,.08));border:3px solid rgba(255,255,255,.5);box-shadow:inset 0 0 40px rgba(255,255,255,.12)}
+.shard{width:150px;height:560px;background:linear-gradient(160deg,rgba(255,255,255,.4),rgba(220,230,240,.16));border-radius:0}
+.wcard{width:900px;padding:30px 36px}
+.wcard .ttl{font-size:44px;white-space:nowrap}
+.chip{height:34px;border-radius:17px;background:#EEEAE0}
+.tg{font:700 30px Cairo;padding:10px 24px;border-radius:999px;background:rgba(30,45,68,.07);color:var(--pnavy)}
+.task{display:flex;align-items:center;gap:20px;height:62px}
+.task .bx{width:46px;height:46px;border-radius:14px;border:3px solid #D5D0C4;display:flex;align-items:center;justify-content:center}
+.task .bx svg{width:30px;height:30px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.vcard{width:420px;height:290px;padding:18px}
+.vscr{width:100%;height:100%;border-radius:22px;background:linear-gradient(135deg,#1E2D44,#2c4466);position:relative;overflow:hidden}
+.orb{width:150px;height:150px;border-radius:44px}
+.orb svg{width:74px;height:74px;stroke:var(--green);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dot{width:30px;height:30px;border-radius:50%}
+.pl2{font-size:32px;padding:16px 26px;gap:14px}
+.pl2 .ck{width:44px;height:44px}.pl2 .ck svg{width:26px;height:26px}
+.qb{font:700 34px Cairo;padding:22px 30px;border-radius:30px 30px 30px 8px;background:var(--pnavy);color:#fff;white-space:nowrap}
+</style></head>
+<body><div id="stage"></div>
+<script src="engine.js"></script>
+<script>
+const T = 47.3;
+const B = [0, 8.0, 17.5, 22.6, 26.6, 34.2, 41.1, T];
+const DARK = [[0, 1], [7.25, 0], [22.6, 1], [26.6, 0], [34.2, 1]];
+const CLIPS = {
+  A_vibe: { src: 'L', t0: 18, t1: 24, dur: 2.2, w: 900 },
+  A_list: { src: 'P', t0: 9, t1: 15, dur: 2.0 },
+  A_book: { src: 'P', t0: 36, t1: 44, dur: 1.9 },
+  A_task: { src: 'P', t0: 51, t1: 60, dur: 3.5 },
+};
+const CUES = [
+  [.25, 'pop'], [2.9, 'pop'], [3.6, 'tick'], [3.95, 'pop'], [5.32, 'whoosh'], [6.85, 'crack'], [7.15, 'shatter'], [7.7, 'ding'],
+  [8.0, 'whoosh'], [10.92, 'pop'], [12.45, 'pop'], [13.92, 'pop'], [14.3, 'tick'], [14.6, 'tick'], [15.6, 'pop'], [16.1, 'tick'], [16.5, 'tick'], [16.9, 'ding'],
+  [17.5, 'whoosh'], [19.3, 'pop'], [19.9, 'pop'], [21.14, 'pop'],
+  [22.6, 'whoosh'], [22.97, 'pop'], [24.4, 'tick'], [24.7, 'tick'], [25.0, 'tick'], [25.3, 'tick'], [25.6, 'tick'], [25.9, 'tick'],
+  [26.6, 'whoosh'], [28.9, 'pop'], [30.83, 'pop'], [32.23, 'pop'],
+  [34.2, 'whoosh'], [35.0, 'pop'], [36.4, 'ding'],
+  [41.1, 'whoosh'], [42.1, 'pop'], [43.31, 'pop'], [43.6, 'tick'], [43.75, 'tick'], [43.9, 'tick'], [44.05, 'tick'], [44.15, 'ding'], [44.6, 'pop'],
+];
+const stage = document.getElementById('stage');
+const C = chrome(stage);
+const G = B.slice(0, -1).map(() => $(stage, 'grp'));
+const NB = ' ';
+
+// ---- S0: the barrier ----
+const g0 = G[0];
+const h1 = A(g0, 540, 380, 'head', W(`نفسك تستخدم الـ${NB}AI`) + '<br>' + W('*باحترافية…*'));
+const h2 = A(g0, 540, 590, 'head sm', W('بس حاسس إن في ~حاجز~ بينك وبينه؟'));
+const h3 = A(g0, 540, 400, 'head md', W(`في دبلومة Smarter${NB}With${NB}AI`));
+const h4 = A(g0, 540, 560, 'head', W('الحاجز ده *هيتشال*'));
+const you = A(g0, 830, 1110, 'card who', `<div class="av">${svg('user')}</div><div class="nm">انت</div>`);
+const ai = A(g0, 250, 1110, 'card who ai', `<div class="av">${svg('spark')}</div><div class="nm" style="direction:ltr">AI</div>`);
+const lineS = A(g0, 540, 1110, '', `<svg width="420" height="40" viewBox="0 0 420 40"><path id="ln1" d="M410 20 H10" stroke="#8A93A3" stroke-width="6" stroke-dasharray="14 14" fill="none"/><path id="ln2" d="M410 20 H10" stroke="#92B43B" stroke-width="8" stroke-linecap="round" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>`);
+const glass = A(g0, 540, 1110, 'glass', `<svg width="150" height="560" viewBox="0 0 150 560" style="position:absolute;inset:0"><path id="cr" d="M80 0 L62 120 L96 210 L58 300 L88 380 L70 470 L84 560 M62 120 L10 170 M96 210 L150 250 M58 300 L0 330 M88 380 L150 420" stroke="#fff" stroke-width="3.5" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>`);
+const xMark = A(g0, 540, 1110, '', `<div style="width:96px;height:96px;border-radius:50%;background:var(--warm);display:flex;align-items:center;justify-content:center">${svg('x', 'style="width:56px;height:56px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round"')}</div>`);
+const okMark = A(g0, 540, 1110, '', `<div style="width:104px;height:104px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(146,180,59,.4)">${svg('check', 'style="width:60px;height:60px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round"')}</div>`);
+const SH = [];
+{ // 12 shards: 2 cols x 6 rows, each split diagonally
+  const cols = [0, 75, 150], rows = [0, 95, 190, 280, 375, 465, 560];
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 2; c++) {
+    const [x0, x1, y0, y1] = [cols[c], cols[c + 1], rows[r], rows[r + 1]];
+    for (const poly of [[[x0, y0], [x1, y0], [x0, y1]], [[x1, y0], [x1, y1], [x0, y1]]]) {
+      const el = A(g0, 540, 1110, 'shard', '', { clipPath: `polygon(${poly.map(([x, y]) => `${x}px ${y}px`).join(',')})` });
+      const cx = poly.reduce((s, p) => s + p[0], 0) / 3 - 75, cy = poly.reduce((s, p) => s + p[1], 0) / 3 - 280;
+      SH.push({ el, vx: cx * 9 + (r % 2 ? 60 : -60), vy: cy * 1.6 - 380, vr: (c ? 1 : -1) * (120 + r * 40) });
+    }
+  }
+}
+
+// ---- S1: what it does for you ----
+const g1 = G[1];
+const s1h = A(g1, 540, 410, 'head', W('هتعرف إزاي توظفه *صح*') + '<br>' + W('في كل حاجة تخصك'));
+const mk = (y, icon, title, inner, h = 170) => A(g1, 540, y, 'card wcard', `<div class="row" style="height:${h - 60}px">${ic(icon)}<div class="ttl">${title}</div><div style="flex:1"></div>${inner}</div>`);
+const c1 = mk(700, 'search', 'بيبحث معاك', `<div style="width:250px;display:flex;flex-direction:column;gap:12px">${[1, 2, 3].map(() => '<div class="chip src" style="width:0"></div>').join('')}</div>`);
+const c2 = mk(895, 'book', 'يساعدك تتعلم أسرع', `<div style="width:250px"><div class="bar"><div class="bar g lrn" style="width:0;height:18px"></div></div></div>`);
+const c3 = mk(1090, 'sliders', 'تعلّمه طريقتك في شغلك', `<span class="tg t1">تفضيلاتك</span>`);
+const c4 = A(g1, 540, 1370, 'card wcard', `<div class="row" style="height:96px">${ic('bolt')}<div class="ttl">ينفذ تاسكات مكانك</div></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-right:122px">${[260, 340, 220].map(w => `<div class="task"><div class="bx">${svg('check')}</div><div class="bar" style="width:${w}px"></div></div>`).join('')}</div>`);
+
+// ---- S2: videos, designs, your website ----
+const g2 = G[2];
+const s2a = A(g2, 540, 310, 'head sm', W('ممكن كمان يساعدك في صناعة'));
+const s2b = A(g2, 540, 430, 'head md', W('*الفيديوهات* *والتصميمات* *الاحترافية*'));
+const vc = A(g2, 300, 760, 'card vcard', `<div class="vscr"><div style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center">${svg('play', 'style="width:44px;height:44px;fill:#1E2D44;stroke:none;margin-left:6px"')}</div><div style="position:absolute;left:24px;right:24px;bottom:22px;height:10px;border-radius:5px;background:rgba(255,255,255,.25)"><div class="vp" style="height:10px;border-radius:5px;background:#92B43B;width:0"></div></div></div>`);
+const dc = A(g2, 780, 760, 'card vcard', `<div style="width:100%;height:100%;border-radius:22px;background:#F4F1E8;position:relative;overflow:hidden"><div class="d1" style="position:absolute;right:-30px;top:-30px;width:190px;height:190px;border-radius:50%;background:#92B43B"></div><div class="d2" style="position:absolute;left:26px;top:34px;width:150px;height:22px;border-radius:11px;background:#1E2D44"></div><div class="d3" style="position:absolute;left:26px;top:72px;width:110px;height:22px;border-radius:11px;background:#1E2D44;opacity:.4"></div><div class="d4" style="position:absolute;left:26px;bottom:26px;width:180px;height:70px;border-radius:16px;background:#1E2D44"></div></div>`);
+const webTag = A(g2, 540, 1000, 'tag', 'لحد موقعك الخاص');
+const br = browser(g2, 540, 1330, 900, 520);
+
+// ---- S3: generative AI ----
+const g3 = G[3];
+const s3t = A(g3, 540, 520, 'tag', 'ببساطة');
+const s3a = A(g3, 540, 680, 'head md dk', W('هنعلمك كل حاجة عن'));
+const s3b = A(g3, 540, 860, 'head dk', W('*الذكاء* *الاصطناعي*'), { fontSize: '110px' });
+const s3c = A(g3, 540, 1000, 'head dk', W('*التوليدي*'), { fontSize: '110px' });
+const s3d = A(g3, 540, 1120, 'head sm', 'Generative AI', { color: 'rgba(251,249,244,.55)', direction: 'ltr', fontWeight: 700 });
+const ORB = ['image', 'video', 'chat', 'code', 'mic', 'slides'].map((k, i) => A(g3, 140 + i * 160, 1360, 'card dkc orb', `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">${svg(k)}</div>`));
+
+// ---- S4: how you learn ----
+const g4 = G[4];
+const s4h = A(g4, 540, 380, 'head', W('من خلال محاضرات') + '<br>' + W('*معمولة* *مخصوص*'));
+const ph = phone(g4, 760, 1130);
+const pimg = ph.querySelector('img');
+const PL = [[820, 'كتيب لكل محاضرة', 28.9], [1000, 'متابعة مستمرة', 30.83], [1180, 'أسئلتك مرحب بيها', 32.23]]
+  .map(([y, tx, a]) => [A(g4, 255, y, 'pill pl2', `<div class="ck">${svg('check')}</div>${tx}`), a]);
+const qb = A(g4, 255, 1380, 'qb', 'عندي سؤال؟');
+
+// ---- S5: 300+ graduates ----
+const g5 = G[5];
+const s5a = A(g5, 540, 400, 'head md dk', W('انضم لأكتر من'));
+const s5n = A(g5, 540, 590, 'big g', '+0');
+const s5b = A(g5, 540, 770, 'head md dk', W('خريج من مجالات مختلفة'));
+const DOTS = [];
+{
+  const cols = 20, rows = 9, gap = 44, x0 = 540 - (cols - 1) * gap / 2, y0 = 900;
+  const pal = ['#92B43B', '#FBF9F4', '#8A93A3', '#7A9632', '#E08A3C', '#FBF9F4', '#92B43B'];
+  let s = 7;
+  const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++)
+    DOTS.push({ el: A(g5, x0 + c * gap, y0 + r * gap, 'dot', '', { background: pal[Math.floor(rnd() * pal.length)] }), d: rnd() });
+}
+const s5c = A(g5, 540, 1350, 'head sm dk', W('جربوا الرحلة دي معانا،'));
+const s5d = A(g5, 540, 1455, 'head sm dk', W('وبقوا *أذكى* في استخدام'));
+const s5e = A(g5, 540, 1550, 'head sm dk', W('الذكاء الاصطناعي'));
+
+// ---- S6: CTA ----
+const g6 = G[6];
+const s6a = A(g6, 540, 500, 'head dk', W('الدبلومة عليها'));
+const s6b = A(g6, 540, 680, 'badge', 'خصم دلوقتي');
+const s6c = A(g6, 540, 830, 'head sm', 'الحق الفرصة', { color: 'rgba(251,249,244,.7)', fontWeight: 700 });
+const cb = commentBox(g6, 540, 1160);
+const rp = replyBubble(g6, 560, 1380, 'هنبعتلك تفاصيل الدبلومة', 'Smarter With AI');
+
+function frame(t) {
+  const dk = darkAt(t, DARK);
+  chromeAt(C, t, T, dk);
+  const on = i => grp(G[i], t, B[i], B[i + 1], { first: i === 0, last: i === G.length - 1 });
+
+  if (on(0)) {
+    const txt = mix('#FBF9F4', '#1E2D44', 1 - dk);
+    [h1, h2, h3, h4].forEach(h => h.style.color = txt);
+    const o1 = 1 - pr(t, 5.0, .35);
+    words(h1, t, [.25, .7, 1.15, 1.7]); h1.style.opacity = o1;
+    words(h2, t, spread(2.4, 4.1, 7)); h2.style.opacity = o1;
+    words(h3, t, [5.32, 5.7, 6.0]);
+    words(h4, t, [6.6, 6.8, 7.0]);
+    rv(you, t, .9, { dx: 80, dy: 0 });
+    rv(ai, t, 1.2, { dx: -80, dy: 0 });
+    // glass drops in, cracks, shatters
+    const shatter = 7.15;
+    if (t < shatter) {
+      const k = pr(t, 2.9, .6, 'back');
+      st(glass, { op: pr(t, 2.9, .3), y: (1 - k) * -500 });
+      glass.querySelector('#cr').style.strokeDashoffset = 1 - pr(t, 6.85, .3);
+      st(glass, { op: pr(t, 2.9, .3), y: (1 - k) * -500, x: t > 6.85 ? Math.sin(t * 90) * 4 : 0 });
+    } else glass.style.opacity = 0;
+    SH.forEach(({ el, vx, vy, vr }) => {
+      if (t < shatter) { el.style.opacity = 0; return; }
+      const u = t - shatter;
+      st(el, { op: 1 - pr(t, shatter + .35, .45), x: vx * u * .5, y: vy * u * .5 + 1400 * u * u, r: vr * u });
+    });
+    // dashed line blocked, then green connection
+    lineS.style.opacity = pr(t, 3.4, .3);
+    lineS.style.transform = 'translate(-50%,-50%)';
+    lineS.querySelector('#ln1').style.opacity = 1 - pr(t, 7.2, .2);
+    lineS.querySelector('#ln1').setAttribute('d', `M410 20 H${L(410, 270, pr(t, 3.4, .5))}`);
+    lineS.querySelector('#ln2').style.strokeDashoffset = 1 - pr(t, 7.3, .4);
+    if (t < 7.15) pop(xMark, t, 3.95, { y: -330 }); else st(xMark, { op: 0 });
+    pop(okMark, t, 7.7, { y: -120 });
+    if (t < 7.7) okMark.style.opacity = 0;
+  }
+
+  if (on(1)) {
+    words(s1h, t, spread(8.1, 10.3, 8));
+    rv(c1, t, 10.92); rv(c2, t, 12.45); rv(c3, t, 13.92);
+    const c4k = rv(c4, t, 15.6);
+    c1.querySelectorAll('.src').forEach((e, i) => e.style.width = (L(0, [250, 190, 220][i], pr(t, 11.1 + i * .25, .5))) + 'px');
+    c2.querySelector('.lrn').style.width = (pr(t, 12.7, 1.1) * 100) + '%';
+    [['.t1', 14.5]].forEach(([s, a]) => { const e = c3.querySelector(s); const k = pr(t, a, .45, 'back'); e.style.opacity = cl(k * 2); e.style.transform = `scale(${L(.5, 1, k)})`; });
+    c4.querySelectorAll('.task').forEach((e, i) => {
+      const k = pr(t, 16.1 + i * .4, .3, 'back');
+      const bx = e.querySelector('.bx');
+      bx.style.background = k > .05 ? '#92B43B' : 'transparent';
+      bx.style.borderColor = k > .05 ? '#92B43B' : '#D5D0C4';
+      bx.style.transform = `scale(${k > .05 ? L(.6, 1, k) : 1})`;
+      bx.querySelector('svg').style.opacity = k;
+      e.querySelector('.bar').style.background = k > .05 ? 'rgba(146,180,59,.35)' : '#ECE8DD';
+    });
+  }
+
+  if (on(2)) {
+    words(s2a, t, spread(17.8, 19.0, 5));
+    words(s2b, t, [19.3, 19.9, 20.4]);
+    pop(vc, t, 19.3, { r: -6 }); pop(dc, t, 19.9, { r: 6 });
+    vc.querySelector('.vp').style.width = (pr(t, 19.6, 3, 'lin') * 100) + '%';
+    dc.querySelector('.d1').style.transform = `scale(${pr(t, 20.1, .5, 'back')})`;
+    ['.d2', '.d3', '.d4'].forEach((s, i) => dc.querySelector(s).style.transform = `scaleX(${pr(t, 20.3 + i * .15, .4)})`);
+    pop(webTag, t, 21.14);
+    rv(br, t, 21.25, { dy: 120 });
+    seq(br.querySelector('img'), 'A_vibe', t, 21.25);
+  }
+
+  if (on(3)) {
+    pop(s3t, t, 22.97);
+    words(s3a, t, [23.71, 24.33, 24.6, 24.85]);
+    words(s3b, t, [25.0, 25.4]);
+    words(s3c, t, [25.8]);
+    rv(s3d, t, 26.0, { dy: 20 });
+    ORB.forEach((o, i) => { pop(o, t, 24.4 + i * .3, { y: Math.sin(t * 2 + i) * 10 }); });
+  }
+
+  if (on(4)) {
+    words(s4h, t, [26.96, 27.35, 27.8, 28.2, 28.5]);
+    rv(ph, t, 27.0, { dy: 160 });
+    const im = pimg;
+    if (t < 29.0) seq(im, 'A_list', t, 27.0);
+    else if (t < 30.9) seq(im, 'A_book', t, 29.0);
+    else seq(im, 'A_task', t, 30.9);
+    PL.forEach(([e, a]) => rv(e, t, a, { dx: -60, dy: 0 }));
+    pop(qb, t, 32.6, { y: Math.sin(t * 2.4) * 6 });
+  }
+
+  if (on(5)) {
+    words(s5a, t, [34.57, 34.85, 35.1]);
+    pop(s5n, t, 35.0, { s0: .6 });
+    countAt(s5n, t, 35.0, 1.4, 300);
+    words(s5b, t, spread(36.3, 37.3, 4));
+    DOTS.forEach(({ el, d }) => pop(el, t, 35.0 + d * 1.5, { d: .35, s0: 0 }));
+    words(s5c, t, spread(37.8, 38.5, 4));
+    words(s5d, t, spread(38.84, 39.8, 4));
+    words(s5e, t, [40.0, 40.3]);
+  }
+
+  if (on(6)) {
+    words(s6a, t, [41.46, 41.8]);
+    pop(s6b, t, 42.1, { r: -8 });
+    s6b.style.transform += ' rotate(-3deg)';
+    rv(s6c, t, 42.5, { dy: 20 });
+    commentAt(cb, t, 43.31, 'مهتم', 43.6, 44.15);
+    pop(rp, t, 44.6, { s0: .6, y: Math.sin(t * 2) * 4 });
+  }
+}
+</script></body></html>
