@@ -197,4 +197,48 @@ window.render = async function (t) {
   PENDING.length = 0;
   frame(t);
   await Promise.all(PENDING);
+  if (PENDING.length) await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 };
+
+// ---------- captions ----------
+// list: [[text, t0, t1], ...]; word highlight time spread by character length
+function captions(stage, list) {
+  const wrap = $(stage, ''); wrap.id = 'caps';
+  return list.map(([text, a, b]) => {
+    const el = $(wrap, 'cap');
+    const ws = text.split(' ');
+    el.innerHTML = ws.map(w => `<span class="cw">${w}</span>`).join(' ');
+    const tot = ws.reduce((s, w) => s + w.length + 1, 0);
+    let acc = 0;
+    const times = ws.map(w => { const tt = a + (b - a) * acc / tot; acc += w.length + 1; return tt; });
+    return { el, a, b, times, spans: [...el.querySelectorAll('.cw')] };
+  });
+}
+function capsAt(caps, t) {
+  caps.forEach((c, i) => {
+    const next = caps[i + 1];
+    const end = next ? Math.min(next.a, c.b + .5) : c.b + .8;
+    if (t < c.a - .08 || t > end + .1) { c.el.style.opacity = 0; return; }
+    const k = pr(t, c.a - .08, .18), ko = pr(t, end - .02, .12);
+    c.el.style.opacity = Math.min(k, 1 - ko);
+    c.el.style.transform = `translate(-50%,-50%) translateY(${(1 - k) * 16}px) scale(${L(.94, 1, k)})`;
+    c.spans.forEach((s, j) => s.classList.toggle('on', t >= c.times[j] && (j === c.spans.length - 1 || t < c.times[j + 1] + .25)));
+  });
+}
+// camera: apply translate/scale to a world container so point (fx,fy) is centered-ish
+function cam(world, x, y, s, r = 0) {
+  world.style.transformOrigin = '540px 960px';
+  world.style.transform = `translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+}
+// sample points from text drawn on a canvas (for particle shapes)
+function textPoints(text, n, { size = 420, font = '900', w = 1000, h = 520 } = {}) {
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const c = cv.getContext('2d');
+  c.fillStyle = '#000'; c.font = `${font} ${size}px Cairo`; c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.direction = 'ltr'; c.fillText(text, w / 2, h / 2 + size * .05);
+  const d = c.getImageData(0, 0, w, h).data, pts = [];
+  for (let y = 0; y < h; y += 6) for (let x = 0; x < w; x += 6) if (d[(y * w + x) * 4 + 3] > 128) pts.push([x - w / 2, y - h / 2]);
+  let s = 11; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  for (let i = pts.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [pts[i], pts[j]] = [pts[j], pts[i]]; }
+  return Array.from({ length: n }, (_, i) => pts[i % pts.length]);
+}

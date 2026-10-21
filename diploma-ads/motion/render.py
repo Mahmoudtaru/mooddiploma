@@ -95,7 +95,7 @@ async def main(name, stills=None, fps=30):
         pg = await b.new_page(viewport={'width': 1080, 'height': 1920})
         await pg.goto(url)
         await pg.evaluate('document.fonts.ready')
-        meta = await pg.evaluate('({clips: CLIPS, cues: CUES, T: T})')
+        meta = await pg.evaluate('({clips: CLIPS, cues: CUES, T: T, music: (typeof MUSIC !== "undefined" ? MUSIC : null)})')
         cut_clips(meta['clips'])
         T = meta['T']
         if stills:
@@ -113,14 +113,26 @@ async def main(name, stills=None, fps=30):
         ff.stdin.close(); ff.wait()
         await b.close()
     s = sfx(meta['cues'], T)
+    import music as mus
+    mpath = f'{D}/out/music_{name}.wav'
+    mm = meta['music'] or {'style': name, 'drop': None}
+    m = mus.music(mm['style'], T, mm.get('drop'))
+    with wave.open(mpath, 'wb') as wv:
+        wv.setnchannels(2); wv.setsampwidth(2); wv.setframerate(48000)
+        wv.writeframes((m * 32767).astype(np.int16).tobytes())
+    fc = ('[1:a]aresample=48000,apad,asplit=2[v][vsc];'
+          '[3:a]volume=0.55[m0];[m0][vsc]sidechaincompress=threshold=0.025:ratio=7:attack=15:release=380:makeup=1[m];'
+          '[2:a]volume=0.9[s];'
+          '[v][s][m]amix=inputs=3:normalize=0:duration=first,loudnorm=I=-15:TP=-1.5:LRA=11,aresample=48000[a]')
     subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', f'{D}/out/{name}_video.mp4', '-i', f'{D}/vo/{name}.wav', '-i', s,
-                    '-filter_complex', '[1:a]aresample=48000,apad[v];[2:a]volume=0.9[s];[v][s]amix=inputs=2:normalize=0:duration=first,volume=1.5,alimiter=limit=0.93[a]',
+                    '-i', mpath, '-filter_complex', fc,
                     '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest',
                     f'{D}/out/{name}.mp4'], check=True)
     print('done', f'{D}/out/{name}.mp4')
 
 
 if __name__ == '__main__':
+    sys.path.insert(0, D)
     name = sys.argv[1]
     stills = None
     if '--stills' in sys.argv:

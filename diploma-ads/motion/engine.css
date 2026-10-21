@@ -68,3 +68,11 @@ body{font-family:Cairo,sans-serif;direction:rtl;color:var(--pnavy)}
 .reply .rs{font:600 28px Cairo;color:var(--muted)}
 .badge{font:900 64px Cairo;padding:24px 58px;border-radius:36px;background:var(--green);color:#fff;box-shadow:0 22px 50px rgba(146,180,59,.35);white-space:nowrap}
 .big{font-weight:900;font-size:230px;line-height:1;letter-spacing:-4px;direction:ltr}
+/* captions (reels style) */
+#caps{position:absolute;left:0;right:0;top:1500px;height:0;z-index:40}
+.cap{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);max-width:960px;text-align:center;font:800 54px/1.45 Cairo;color:#fff;padding:14px 30px;border-radius:26px;background:rgba(7,17,31,.80);box-shadow:0 14px 40px rgba(0,0,0,.25);opacity:0;width:max-content;max-width:940px}
+.cap .cw{transition:none}
+.cap .cw.on{color:#B9DD5B}
+/* depth helpers */
+.orbit{position:absolute;border-radius:50%;border:3px solid rgba(146,180,59,.45)}
+.glow{position:absolute;border-radius:50%;filter:blur(60px)}
