@@ -25,18 +25,18 @@
 .lb.me{background:#1E2D44;align-self:flex-start}
 .lbase{position:absolute;left:-40px;bottom:0;width:520px;height:30px;border-radius:4px 4px 22px 22px;background:#CFCABD}
 .slot{border-radius:40px;border:4px dashed rgba(30,45,68,.18)}
-.cap4{width:480px;height:340px;padding:26px 28px;display:flex;flex-direction:column;gap:14px}
+.cap4{width:480px;height:430px;padding:26px 28px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
 .cap4 .tt{font:800 38px Cairo;display:flex;align-items:center;gap:14px;white-space:nowrap}
 .cap4 .tt .ic{width:70px;height:70px;border-radius:22px}.cap4 .tt .ic svg{width:40px;height:40px}
 .ub{align-self:flex-start;font:800 30px Cairo;padding:14px 22px;border-radius:26px 26px 8px 26px;background:var(--pnavy);color:#fff;white-space:nowrap}
 .srcc{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:20px;background:#F6F3EC}
 .srcc .n{width:46px;height:46px;border-radius:14px;background:#92B43B;color:#fff;font:900 26px Cairo;display:flex;align-items:center;justify-content:center;flex:none}
-.pg{width:120px;height:160px;border-radius:16px;background:#fff;border:2px solid #E6E2D8;box-shadow:0 8px 20px rgba(20,28,41,.08)}
+.pg{width:150px;height:200px;border-radius:16px;background:#fff;border:2px solid #E6E2D8;box-shadow:0 8px 20px rgba(20,28,41,.08)}
 .bl{display:flex;align-items:center;gap:14px}.bl i{width:18px;height:18px;border-radius:50%;background:#92B43B;display:block;flex:none}
 .fc{width:120px;height:80px;border-radius:16px;background:var(--pnavy)}
 .note{font:800 30px Cairo;padding:14px 22px;border-radius:16px;background:#fff;border:3px solid #92B43B;box-shadow:0 10px 24px rgba(20,28,41,.12);white-space:nowrap}
-.doc{width:230px;height:170px;border-radius:22px;background:#F6F3EC;border:2px solid #E6E2D8;padding:22px;display:flex;flex-direction:column;gap:14px}
-.trow{display:flex;align-items:center;gap:16px;font:800 30px Cairo;height:60px;padding:0 18px;border-radius:18px;background:#F6F3EC;position:relative;white-space:nowrap}
+.doc{width:260px;height:200px;border-radius:22px;background:#F6F3EC;border:2px solid #E6E2D8;padding:22px;display:flex;flex-direction:column;gap:14px}
+.trow{display:flex;align-items:center;gap:16px;font:800 32px Cairo;height:84px;padding:0 18px;border-radius:18px;background:#F6F3EC;position:relative;white-space:nowrap}
 .trow .bx{width:44px;height:44px;border-radius:14px;border:4px solid #CFCABD;display:flex;align-items:center;justify-content:center;flex:none;background:#fff}
 .trow .bx svg{width:28px;height:28px;stroke:#fff;stroke-width:3.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .trow .strike{position:absolute;right:76px;top:50%;height:4px;border-radius:2px;background:#92B43B;width:0}
@@ -113,13 +113,14 @@ const CAPS = [
   ['الدبلومة عليها خصم دلوقتي…', 41.46, 42.74], ['اكتب «مهتم»،', 43.31, 44.18], ['وهنبعتلك تفاصيل الدبلومة.', 44.39, 45.74],
 ];
 // camera moves on one big board: [start, duration, centerX, centerY, scale]
-const MOVES = [[0, 0, 545, 1020, 1.2], [.1, 3.2, 545, 1020, 1.1], [7.45, 1.1, 545, 770, .9],
-  [17.25, .9, 1840, 2990, .86], [22.45, .9, 540, 2960, 1], [26.3, .9, 1840, 960, 1], [33.95, .8, 3140, 960, 1], [40.85, .8, 3140, 2960, 1]];
+const MOVES = [[0, 0, 545, 1020, 1.2], [.1, 3.2, 545, 1020, 1.1], [7.45, 1.0, 540, 560, .82], [10.5, .6, 285, 120, 1.5], [12.05, .6, 795, 120, 1.5], [13.5, .6, 285, 580, 1.5], [15.15, .6, 795, 580, 1.5], [16.6, .55, 540, 560, .82],
+  [17.3, .9, 1840, 2990, .86], [22.45, .9, 540, 2960, 1], [26.3, .9, 1840, 960, 1], [33.95, .8, 3140, 960, 1], [40.85, .8, 3140, 2960, 1]];
 const stage = document.getElementById('stage');
 const board = $(stage, ''); board.id = 'board';
 $(board, '').id = 'grid';
 const C = chrome(stage);
 const caps = captions(stage, CAPS);
+const topFade = $(stage, '', '', { position: 'absolute', left: 0, right: 0, top: 0, height: '250px', zIndex: 45, pointerEvents: 'none' });
 let s_ = 5; const rnd = () => (s_ = (s_ * 9301 + 49297) % 233280) / 233280;
 function camAt(t) {
   let [x, y, s] = MOVES[0].slice(2);
@@ -154,19 +155,19 @@ const keystone = A(board, keyP.x, keyP.y + 500 - 95, '', '<img src="assets/mark.
 const FLOW = [0, 1, 2, 3].map(() => A(board, 0, 0, 'flow'));
 
 // ===== Z2 — capabilities arrive over the bridge, same frame =====
-const CP = [[290, 280], [790, 280], [290, 640], [790, 640]];
+const CP = [[285, 120], [795, 120], [285, 580], [795, 580]];
 const PKT = CP.map(() => A(board, 215, 1080, 'pkt'));
 const card = (i, icon, title, body) => A(board, CP[i][0], CP[i][1], 'card cap4', `<div class="tt">${ic(icon)}${title}</div>${body}`);
 const cR = card(0, 'search', 'بيبحث معاك', `<div class="ub"><span class="q"></span></div>${[1, 2].map(n => `<div class="srcc"><div class="n">${n}</div><div style="flex:1;display:flex;flex-direction:column;gap:10px"><div class="bar" style="width:${[230, 190, 250][n - 1]}px;background:#1E2D44;opacity:.8;height:16px"></div><div class="bar" style="width:${[160, 200, 140][n - 1]}px;height:12px"></div></div></div>`).join('')}`);
-const cL = card(1, 'book', 'تتعلم أسرع', `<div class="hostL" style="position:relative;height:200px"></div>`);
+const cL = card(1, 'book', 'تتعلم أسرع', `<div class="hostL" style="position:relative;height:290px"></div>`);
 const pgsHost = cL.querySelector('.hostL');
 const PG = Array.from({ length: 7 }, (_, i) => $(pgsHost, 'pg', '', { position: 'absolute', right: (150 + i * 5) + 'px', top: (6 + i * 5) + 'px' }));
 const sumB = $(pgsHost, '', [230, 260, 190].map(w => `<div class="bl"><i></i><div class="bar" style="width:${w}px;background:#1E2D44;opacity:.75;height:16px"></div></div>`).join(''), { position: 'absolute', right: '10px', top: '6px', display: 'flex', flexDirection: 'column', gap: '18px' });
-const FC = [0, 1, 2].map(i => $(pgsHost, 'fc', '', { position: 'absolute', right: (20 + i * 135) + 'px', top: '128px', width: '110px', height: '64px' }));
-const cW = card(2, 'sliders', 'طريقتك في شغلك', `<div class="hostW" style="position:relative;height:200px"></div>`);
+const FC = [0, 1, 2].map(i => $(pgsHost, 'fc', '', { position: 'absolute', right: (20 + i * 140) + 'px', top: '160px', width: '120px', height: '90px' }));
+const cW = card(2, 'sliders', 'طريقتك في شغلك', `<div class="hostW" style="position:relative;height:290px"></div>`);
 const wHost = cW.querySelector('.hostW');
-const doc = $(wHost, 'doc', `<div style="font:800 26px Cairo;color:#1E2D44">تعليماتك</div>${[200, 170, 210].map(w => `<div class="bar dl" style="width:${w}px;height:16px;transform:scaleX(0);transform-origin:right"></div>`).join('')}`, { position: 'absolute', left: '50%', top: '30px', marginLeft: '-115px' });
-const NOTES = [['بالمصري', -120, 0, -8], ['مختصر', 120, -6, 7], ['بأسلوبي', 0, 60, -4]].map(([tx, x, y, r]) => ({ el: $(wHost, 'note', tx, { position: 'absolute', left: '50%', top: y + 'px' }), x, r }));
+const doc = $(wHost, 'doc', `<div style="font:800 26px Cairo;color:#1E2D44">تعليماتك</div>${[200, 170, 210].map(w => `<div class="bar dl" style="width:${w}px;height:16px;transform:scaleX(0);transform-origin:right"></div>`).join('')}`, { position: 'absolute', left: '50%', top: '80px', marginLeft: '-130px' });
+const NOTES = [['بالمصري', -120, 0, -8], ['مختصر', 120, -6, 7], ['بأسلوبي', 0, 110, -4]].map(([tx, x, y, r]) => ({ el: $(wHost, 'note', tx, { position: 'absolute', left: '50%', top: y + 'px' }), x, r }));
 const cT = card(3, 'bolt', 'ينفذ تاسكات', `${['الإيميلات', 'جدول الأسبوع', 'تقرير الشهر'].map(x => `<div class="trow"><div class="bx">${svg('check')}</div>${x}<div class="strike"></div></div>`).join('')}`);
 
 // ===== Z3 — made in front of you (board x 1300..2380, y 2000..3920) =====
@@ -222,6 +223,8 @@ function frame(t) {
   chromeAt(C, t, T, dk);
   capsAt(caps, t);
   const [cx, cy, cs] = camAt(t);
+  const tc = dk > .5 ? '20,28,41' : '251,249,244';
+  topFade.style.background = `linear-gradient(rgba(${tc},.97) 0%,rgba(${tc},.9) 45%,rgba(${tc},0) 100%)`;
   const shake = (t > 3.0 && t < 3.3) || (t > 6.6 && t < 6.9) || (t > 42.1 && t < 42.4) ? Math.sin(t * 140) * 7 : 0;
   board.style.transform = `translate(${540 - cx * cs + shake}px,${960 - cy * cs}px) scale(${cs})`;
 
@@ -261,7 +264,8 @@ function frame(t) {
   const CA = [10.92, 12.45, 13.92, 15.55];
   PKT.forEach((p, i) => { const a = CA[i] - .55; const k = pr(t, a, .55, 'io'); const [tx, ty] = CP[i]; const bx = L(215, tx, k), by = L(1080, ty, k) - Math.sin(Math.PI * k) * 160; p.style.left = bx + 'px'; p.style.top = by + 'px'; st(p, { op: t > a && t < CA[i] + .05 ? 1 : 0, s: L(.6, 1.2, k) }); });
   lap1.querySelector('.lscr').style.boxShadow = CA.some(a => t > a - .6 && t < a - .3) ? '0 0 0 6px rgba(146,180,59,.6),0 30px 70px rgba(0,0,0,.3)' : '0 30px 70px rgba(0,0,0,.3)';
-  [cR, cL, cW, cT].forEach((c, i) => pop(c, t, CA[i], { s0: .7 }));
+  const focus = [[10.5, 12.05], [12.05, 13.5], [13.5, 15.15], [15.15, 16.6]];
+  [cR, cL, cW, cT].forEach((c, i) => { pop(c, t, CA[i], { s0: .7 }); const other = focus.some(([a, b], j) => j !== i && t > a + .2 && t < b + .1); if (other) c.style.opacity = Math.min(Number(c.style.opacity), .3); });
   const q = 'إيه الجديد في مجالي؟';
   cR.querySelector('.q').textContent = q.slice(0, Math.round(q.length * pr(t, 11.1, .5, 'lin')));
   cR.querySelectorAll('.srcc').forEach((e, i) => { const k = pr(t, 11.55 + i * .2, .4); e.style.opacity = k; e.style.transform = `translateY(${(1 - k) * 30}px)`; });
