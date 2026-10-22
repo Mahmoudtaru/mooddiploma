@@ -201,7 +201,7 @@ const ph = phone(board, 1940, 930);
 const pimg = ph.querySelector('img');
 const scr = ph.querySelector('.scr');
 const GROUPS = [['users', 'يلا نذاكر', 'محمد: خلصت محاضرة النهارده', 12], ['chat', 'أسئلة ونقاشات', 'سؤال جديد', 5], ['check', 'التاسكات', 'تاسك الأسبوع نزل', 3], ['bell', 'التحديثات', 'أداة جديدة تستاهل تجربها', 1]];
-const chatL = $(scr, 'cl', `<div class="hd"><img src="assets/mark.png">جروبات الدبلومة</div>${GROUPS.map(([k, n, m, u]) => `<div class="grow"><div class="av">${svg(k)}</div><div><div class="nm">${n}</div><div class="lm">${m}</div></div><div class="ub2">${u}</div></div>`).join('')}`);
+const chatL = $(scr, 'cl', `<div class="hd">جروبات الدبلومة</div>${GROUPS.map(([k, n, m, u]) => `<div class="grow"><div class="av">${svg(k)}</div><div><div class="nm">${n}</div><div class="lm">${m}</div></div><div class="ub2">${u}</div></div>`).join('')}`);
 const cv = $(scr, 'cv', `<div class="hd">أسئلة ونقاشات</div><div class="bq"><div class="who">سارة</div>إزاي أخلي الـ AI يكتب بأسلوبي؟</div><div class="ba"><div class="who">Smarter With AI</div>اعمله ملف تعليمات بأسلوبك وأمثلة من شغلك، وهنشرحها خطوة بخطوة 👇</div><div class="bq"><div class="who">أحمد</div>جربتها وفرقت جدًا 🔥</div>`);
 const CO = [['محاضرات مخصوص', 26.96, 520], ['كتيب لكل محاضرة', 28.9, 760], ['متابعة مستمرة', 30.83, 1000], ['أسئلتك مرحب بيها', 32.23, 1240]]
   .map(([tx, a, y]) => ({ el: A(board, 1550, y, 'callout', `<div class="ck">${svg('check')}</div>${tx}`), a }));
