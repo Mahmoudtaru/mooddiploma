@@ -45,14 +45,14 @@
 .gen{font:800 36px Cairo;color:#fff;background:#92B43B;padding:16px 34px;border-radius:999px;display:flex;align-items:center;gap:12px;flex:none}
 .gen svg{width:32px;height:32px;fill:#fff;stroke:none}
 .spk{width:18px;height:18px;border-radius:50%;background:#B9DD5B}
-.vwin{width:940px;height:520px;border-radius:36px;overflow:hidden;box-shadow:0 30px 80px rgba(20,28,41,.2)}
-.poster{width:450px;height:600px;border-radius:30px;overflow:hidden;background:#1E2D44;box-shadow:0 30px 70px rgba(20,28,41,.24)}
-.mini{width:450px;height:600px;border-radius:30px;overflow:hidden;background:#fff;border:2px solid #E6E2D8;box-shadow:0 30px 70px rgba(20,28,41,.14)}
+.vwin{width:940px;height:460px;border-radius:36px;overflow:hidden;box-shadow:0 30px 80px rgba(20,28,41,.2)}
+.poster{width:420px;height:520px;border-radius:30px;overflow:hidden;background:#1E2D44;box-shadow:0 30px 70px rgba(20,28,41,.24)}
+.mini{width:420px;height:520px;border-radius:30px;overflow:hidden;background:#fff;border:2px solid #E6E2D8;box-shadow:0 30px 70px rgba(20,28,41,.14)}
 .mini .tb{height:44px;background:#F1EEE6;display:flex;align-items:center;gap:8px;padding:0 16px;direction:ltr}
 .mini .tb i{width:12px;height:12px;border-radius:50%;background:#D9D4C7;display:block}
 .mini .tb b{flex:1;height:24px;border-radius:12px;background:#fff;margin-left:10px;font:600 15px Cairo;color:#8A93A3;display:flex;align-items:center;padding:0 10px}
 .sb{position:absolute;border-radius:12px}
-.otag{font:800 30px Cairo;color:var(--dgreen);background:rgba(146,180,59,.16);padding:8px 22px;border-radius:999px;white-space:nowrap}
+.otag{z-index:5;box-shadow:0 8px 20px rgba(20,28,41,.1);background:#EEF4DC!important;font:800 30px Cairo;color:var(--dgreen);background:rgba(146,180,59,.16);padding:8px 22px;border-radius:999px;white-space:nowrap}
 .genBox{padding:50px 70px;border-radius:50px;background:rgba(20,28,41,.93);box-shadow:0 40px 100px rgba(7,17,31,.35);display:flex;flex-direction:column;align-items:center;gap:10px}
 .genT{font:900 150px/1 Cairo;direction:ltr;white-space:nowrap;background:linear-gradient(100deg,#FBF9F4 0%,#FBF9F4 35%,#d8f08a 48%,#92B43B 55%,#FBF9F4 68%,#FBF9F4 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
 .genA{font:900 64px/1.3 Cairo;color:#92B43B;white-space:nowrap}
@@ -114,7 +114,7 @@ const CAPS = [
 ];
 // camera moves on one big board: [start, duration, centerX, centerY, scale]
 const MOVES = [[0, 0, 545, 1020, 1.2], [.1, 3.2, 545, 1020, 1.1], [7.45, 1.1, 545, 770, .9],
-  [17.25, .9, 1840, 2960, 1], [22.45, .9, 540, 2960, 1], [26.3, .9, 1840, 960, 1], [33.95, .8, 3140, 960, 1], [40.85, .8, 3140, 2960, 1]];
+  [17.25, .9, 1840, 2990, .86], [22.45, .9, 540, 2960, 1], [26.3, .9, 1840, 960, 1], [33.95, .8, 3140, 960, 1], [40.85, .8, 3140, 2960, 1]];
 const stage = document.getElementById('stage');
 const board = $(stage, ''); board.id = 'board';
 $(board, '').id = 'grid';
@@ -170,13 +170,13 @@ const NOTES = [['بالمصري', -120, 0, -8], ['مختصر', 120, -6, 7], ['ب
 const cT = card(3, 'bolt', 'ينفذ تاسكات', `${['الإيميلات', 'جدول الأسبوع', 'تقرير الشهر'].map(x => `<div class="trow"><div class="bx">${svg('check')}</div>${x}<div class="strike"></div></div>`).join('')}`);
 
 // ===== Z3 — made in front of you (board x 1300..2380, y 2000..3920) =====
-const prm = A(board, 1840, 2230, 'prompt', `<div class="tx"><span class="q"></span><span class="cur"></span></div><div class="gen">${svg('spark')}توليد</div>`);
-const SPK = Array.from({ length: 22 }, () => ({ el: A(board, 1480, 2230, 'spk'), a: rnd() * Math.PI * 2, r: 140 + rnd() * 220 }));
-const vwin = A(board, 1840, 2700, 'vwin', `<svg width="940" height="520" viewBox="0 0 940 520"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2D44"/><stop offset="1" stop-color="#7A9632"/></linearGradient></defs><rect width="940" height="520" fill="url(#sky)"/><circle id="sun" cx="470" cy="400" r="76" fill="#F3E7A5"/><path id="h1" d="M-200 430 Q100 300 400 400 T1000 390 T1400 410 V520 H-200z" fill="#4d6d1c"/><path id="h2" d="M-200 480 Q200 380 520 460 T1200 460 V520 H-200z" fill="#2c3f10"/></svg><div style="position:absolute;left:30px;bottom:24px;right:30px;height:12px;border-radius:6px;background:rgba(255,255,255,.3)"><div class="vp" style="height:12px;border-radius:6px;background:#B9DD5B;width:0"></div></div><div style="position:absolute;right:26px;top:22px;font:800 26px Cairo;color:#fff;background:rgba(0,0,0,.35);padding:6px 16px;border-radius:12px;direction:ltr">▶ 0:15</div>`);
-const vTag = A(board, 1840, 3000, 'otag', 'فيديو');
-const poster = A(board, 2090, 3380, 'poster', `<div style="position:absolute;right:-70px;top:-70px;width:300px;height:300px;border-radius:50%;background:#92B43B"></div><div style="position:absolute;left:-40px;bottom:120px;width:180px;height:180px;border-radius:50%;border:20px solid rgba(251,249,244,.18)"></div><img src="assets/mark.png" style="position:absolute;right:36px;bottom:200px;width:180px"><div style="position:absolute;right:36px;bottom:130px;font:900 48px Cairo;color:#fff;white-space:nowrap">تصميمك</div><div style="position:absolute;right:36px;bottom:94px;width:220px;height:16px;border-radius:8px;background:rgba(251,249,244,.4)"></div><div style="position:absolute;right:36px;bottom:30px;width:160px;height:44px;border-radius:22px;background:#92B43B"></div><svg class="nz" width="450" height="600" style="position:absolute;inset:0"><filter id="nf"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="450" height="600" filter="url(#nf)"/></svg><div class="scan" style="position:absolute;left:0;right:0;height:5px;background:#B9DD5B;box-shadow:0 0 20px #B9DD5B"></div>`);
-const dTag = A(board, 2090, 3720, 'otag', 'تصميم');
-const site = A(board, 1590, 3380, 'mini', `<div class="tb"><i></i><i></i><i></i><b>yourname.com</b></div><div class="pgx" style="position:relative;height:556px;background:#FBF9F4"></div>`);
+const prm = A(board, 1840, 2340, 'prompt', `<div class="tx"><span class="q"></span><span class="cur"></span></div><div class="gen">${svg('spark')}توليد</div>`);
+const SPK = Array.from({ length: 22 }, () => ({ el: A(board, 1480, 2340, 'spk'), a: rnd() * Math.PI * 2, r: 140 + rnd() * 220 }));
+const vwin = A(board, 1840, 2770, 'vwin', `<svg width="940" height="460" viewBox="0 0 940 520" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2D44"/><stop offset="1" stop-color="#7A9632"/></linearGradient></defs><rect width="940" height="520" fill="url(#sky)"/><circle id="sun" cx="470" cy="400" r="76" fill="#F3E7A5"/><path id="h1" d="M-200 430 Q100 300 400 400 T1000 390 T1400 410 V520 H-200z" fill="#4d6d1c"/><path id="h2" d="M-200 480 Q200 380 520 460 T1200 460 V520 H-200z" fill="#2c3f10"/></svg><div style="position:absolute;left:30px;bottom:24px;right:30px;height:12px;border-radius:6px;background:rgba(255,255,255,.3)"><div class="vp" style="height:12px;border-radius:6px;background:#B9DD5B;width:0"></div></div><div style="position:absolute;right:26px;top:22px;font:800 26px Cairo;color:#fff;background:rgba(0,0,0,.35);padding:6px 16px;border-radius:12px;direction:ltr">▶ 0:15</div>`);
+const vTag = A(board, 1840, 2540, 'otag', 'فيديو');
+const poster = A(board, 2075, 3275, 'poster', `<div style="position:absolute;right:-70px;top:-70px;width:300px;height:300px;border-radius:50%;background:#92B43B"></div><div style="position:absolute;left:-40px;bottom:120px;width:180px;height:180px;border-radius:50%;border:20px solid rgba(251,249,244,.18)"></div><img src="assets/mark.png" style="position:absolute;right:36px;bottom:200px;width:180px"><div style="position:absolute;right:36px;bottom:130px;font:900 48px Cairo;color:#fff;white-space:nowrap">تصميمك</div><div style="position:absolute;right:36px;bottom:94px;width:220px;height:16px;border-radius:8px;background:rgba(251,249,244,.4)"></div><div style="position:absolute;right:36px;bottom:30px;width:160px;height:44px;border-radius:22px;background:#92B43B"></div><svg class="nz" width="450" height="600" style="position:absolute;inset:0"><filter id="nf"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter><rect width="450" height="600" filter="url(#nf)"/></svg><div class="scan" style="position:absolute;left:0;right:0;height:5px;background:#B9DD5B;box-shadow:0 0 20px #B9DD5B"></div>`);
+const dTag = A(board, 2075, 3015, 'otag', 'تصميم');
+const site = A(board, 1605, 3275, 'mini', `<div class="tb"><i></i><i></i><i></i><b>yourname.com</b></div><div class="pgx" style="position:relative;height:476px;background:#FBF9F4"></div>`);
 const pgx = site.querySelector('.pgx');
 const SB = [[21.2, 'left:0;right:0;top:0;height:56px;background:#1E2D44;border-radius:0'], [21.2, 'right:22px;top:16px;width:90px;height:24px;background:#92B43B'],
   [21.35, 'right:26px;top:90px;width:250px;height:30px;background:#1E2D44'], [21.42, 'right:26px;top:132px;width:200px;height:30px;background:#1E2D44'],
@@ -185,10 +185,10 @@ const SB = [[21.2, 'left:0;right:0;top:0;height:56px;background:#1E2D44;border-r
   [21.7, 'right:26px;top:300px;width:122px;height:150px;background:#fff;border:2px solid #E6E2D8'], [21.78, 'right:164px;top:300px;width:122px;height:150px;background:#fff;border:2px solid #E6E2D8'],
   [21.86, 'right:302px;top:300px;width:122px;height:150px;background:#fff;border:2px solid #E6E2D8'], [21.95, 'left:0;right:0;bottom:0;height:60px;background:#1E2D44;border-radius:0']]
   .map(([a, css]) => { const el = $(pgx, 'sb'); el.style.cssText += ';' + css; return { el, a }; });
-const sTag = A(board, 1590, 3720, 'otag', 'موقعك');
+const sTag = A(board, 1605, 3015, 'otag', 'موقعك');
 
 // ===== Z4 — everything about Generative AI: the real curriculum, built as a mosaic =====
-$(board, 'panel', '', { left: '-200px', top: '2050px', width: '1480px', height: '1880px' });
+$(board, 'panel', '', { left: '-200px', top: '2050px', width: '1430px', height: '1880px' });
 const gT = A(board, 540, 2330, 'gT', 'Generative AI');
 const gA = A(board, 540, 2470, 'gA', 'الذكاء الاصطناعي التوليدي');
 const TOP = [['spark', 'الأساسيات'], ['search', 'البحث والمهام'], ['book', 'Gemini Notebook'], ['slides', 'البريزنتيشن'], ['image', 'الصور والتصميم'], ['mic', 'الصوت'], ['video', 'الفيديو والإعلانات'], ['globe', 'المواقع والتطبيقات'], ['game', 'الألعاب التعليمية'], ['file', 'Google Workspace']]
